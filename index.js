@@ -17,7 +17,7 @@ async function getPuzzle() {
     const response = await fetch('https://sudoku-board.p.rapidapi.com/new-board?diff=2&stype=list&solu=true', options);
     const data = await response.json();
     puzzle = data["response"]["unsolved-sudoku"];
-    console.log(puzzle);
+    solvedPuzzle = data["response"]["solution"];
 }
 
 // function getPuzzle() {
@@ -63,3 +63,16 @@ getButton.addEventListener("click", async () => {
     conCatData();
     writeSudoku();
 })
+
+
+//Target selected tile
+let selectedTile;
+
+grid.addEventListener("click", (event)=>{
+    if(selectedTile) selectedTile.classList.remove("selected")
+    selectedTile = event.target;
+    selectedTile.classList.add("selected")
+});
+
+//Target selected button to insert
+

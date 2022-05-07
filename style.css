@@ -26,6 +26,15 @@ li {
     font-size: 30px;
 }
 
+ul :hover{
+   background-color: cadetblue; 
+   cursor: pointer;
+}
+
+.selected {
+    background-color: tomato;
+}
+
 span {
     margin-top: 0.4rem;
 }
