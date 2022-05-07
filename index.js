@@ -13,7 +13,7 @@ const options = {
 };
 
 
-async function getPuzzle(){
+async function getPuzzle() {
     const response = await fetch('https://sudoku-board.p.rapidapi.com/new-board?diff=2&stype=list&solu=true', options);
     const data = await response.json();
     puzzle = data["response"]["unsolved-sudoku"];
@@ -29,21 +29,30 @@ async function getPuzzle(){
 
 // }
 
-function conCatData(){
-    puzzle = puzzle[0].concat(puzzle[1],puzzle[2],puzzle[3],puzzle[4],puzzle[5],puzzle[6],puzzle[7],puzzle[8])
+const grid = document.getElementById("grid");
+
+function createGrid() {
+    for (let i = 0; i <= 80; i++) {
+        const newTile = document.createElement("li");
+        grid.appendChild(newTile);
+    }
+}
+
+createGrid();
+
+function conCatData() {
+    puzzle = puzzle[0].concat(puzzle[1], puzzle[2], puzzle[3], puzzle[4], puzzle[5], puzzle[6], puzzle[7], puzzle[8])
 }
 
 function writeSudoku() {
-    
-    const grid = document.getElementById("grid");
 
-    for(let i=0; i<=81; i++){
-        
+    for (let i = 0; i <= 80; i++) {
+
         let tile = grid.children[i];
 
         tile.innerText = puzzle[i];
 
-        if(tile.innerText == 0) tile.innerText= "";
+        if (tile.innerText == 0) tile.innerText = "";
     }
 
 }

@@ -68,5 +68,5 @@ Aquesta API permetia descarregar el trencaclosques i la solució alhora però te
 limitació de 50 cerques diàries i, per aconseguir la "key", calia fer un registre de 
 la targeta de crèdit ja que, un cop superades les 50 cerques, es carregava un import.
 
-La primera opció doncs, va quedar també descartada degut a que el nivell de peticions
+Aquesta opció doncs, va quedar també descartada degut a que el nivell de peticions
 durant el desenvolupament podia superar les 50 cerques al dia i suposaria un cost. 
