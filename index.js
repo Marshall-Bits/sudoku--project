@@ -1,5 +1,6 @@
 const getButton = document.getElementById('get-btn')
-
+const grid = document.getElementById("grid");
+const buttonsGrid = document.getElementById("buttons-grid");
 
 let puzzle;
 let solvedPuzzle;
@@ -29,7 +30,8 @@ async function getPuzzle() {
 
 // }
 
-const grid = document.getElementById("grid");
+
+//
 
 function createGrid() {
     for (let i = 0; i <= 80; i++) {
@@ -53,6 +55,9 @@ function writeSudoku() {
         tile.innerText = puzzle[i];
 
         if (tile.innerText == 0) tile.innerText = "";
+
+        //Add class to the values given
+        if(tile.innerText != "") tile.classList.add("initial-value");
     }
 
 }
@@ -69,10 +74,14 @@ getButton.addEventListener("click", async () => {
 let selectedTile;
 
 grid.addEventListener("click", (event)=>{
+    if(event.target.classList[0] === "initial-value") return;
     if(selectedTile) selectedTile.classList.remove("selected")
     selectedTile = event.target;
     selectedTile.classList.add("selected")
 });
 
 //Target selected button to insert
-
+buttonsGrid.addEventListener("click", (event)=>{
+    const buttonValue = event.target.innerText;
+    if(selectedTile) selectedTile.innerText = buttonValue;
+});
