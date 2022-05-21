@@ -1,5 +1,8 @@
 body {
-    background-color: antiquewhite;
+    background-color: #f5d6a5;
+    background-image: url("./src/img/background.png");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 ul {
@@ -15,15 +18,19 @@ ul {
 }
 
 li {
-    background-color: azure;
     margin: 0;
     padding: 0;
     text-align: center;
-    border: 1px solid black;
+    border-left: 1px solid #326575;
+    border-right: 1px solid #326575;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
+}
+
+li img{
+    width: 100%;
 }
 
 ul :hover{

@@ -36,7 +36,9 @@ async function getPuzzle() {
 function createGrid() {
     for (let i = 0; i <= 80; i++) {
         const newTile = document.createElement("li");
+        const newImg = document.createElement("img");
         grid.appendChild(newTile);
+        newTile.appendChild(newImg);
     }
 }
 
@@ -50,14 +52,17 @@ function writeSudoku() {
 
     for (let i = 0; i <= 80; i++) {
 
-        let tile = grid.children[i];
+        const tileImg = grid.children[i].children[0];
 
-        tile.innerText = puzzle[i];
+        tileImg.src = "";
+        tileImg.alt = "";
 
-        if (tile.innerText == 0) tile.innerText = "";
+        if (puzzle[i] > 0) {
+            tileImg.src = `./src/img/${puzzle[i]}.png`;
+            tileImg.alt = `${puzzle[i]}`;
+            tileImg.classList.add("initial-value");
+        }
 
-        //Add class to the values given
-        if(tile.innerText != "") tile.classList.add("initial-value");
     }
 
 }
@@ -73,15 +78,20 @@ getButton.addEventListener("click", async () => {
 //Target selected tile
 let selectedTile;
 
-grid.addEventListener("click", (event)=>{
-    if(event.target.classList[0] === "initial-value") return;
-    if(selectedTile) selectedTile.classList.remove("selected")
+grid.addEventListener("click", (event) => {
+    console.log(event.target);
+    if (event.target.classList[0] === "initial-value") return;
+    if (selectedTile) selectedTile.classList.remove("selected")
     selectedTile = event.target;
-    selectedTile.classList.add("selected")
+
+    if (event.target.id != "grid") selectedTile.classList.add("selected")
 });
 
 //Target selected button to insert
-buttonsGrid.addEventListener("click", (event)=>{
-    const buttonValue = event.target.innerText;
-    if(selectedTile) selectedTile.innerText = buttonValue;
+buttonsGrid.addEventListener("click", (event) => {
+    const buttonValue = event.target.alt;
+    if (buttonValue && selectedTile) {
+        selectedTile.children[0].src = `./src/img/${buttonValue}.png`;
+        selectedTile.children[0].alt = `${buttonValue}`;
+    }
 });
