@@ -18,6 +18,7 @@ Desenvolupament
 
 - [Fase 1: estructura html i css](#fase-1-estructura-html-i-css)
 - [Fase 2: Tests amb API i DOM](#fase-2-tests-amb-api-i-dom)
+- [Fase 3: Testejant interacció de l'usuari](#fase-3-testejant-interacció-de-lusuari)
 ## Descripció 
 
 Aquest és un projecte de creació d'un joc de sudoku partint d'una API que genera els trencaclosques i els resol de manera automàtica. Per donar personalitat a l'aplicació i un toc original els nombres es substitueixen per símbols.
@@ -105,6 +106,8 @@ Amb CSS la part més òbvia inicialment era convertir tots els elements de la ll
 
 La "responsivitat" en aquest projecte té un gran pès ja que es pretén que sigui un joc funcional a la majoria de dispositius (prioritzant telèfons). 
 
+![Fase01](./src/screenshots/Fase01.png)
+
 No hi ha complicacions en aquest apartat. 
 ## Fase 2: Tests amb API i DOM
 
@@ -149,6 +152,7 @@ Aquest array ens servirà prenent com a referència la grid per tal de que tingu
 
 Amb aquesta base ja podem imprimir els valors. 
 
+![Fase02](./src/screenshots/Fase02.png)
 ### Complicacions:
 
 - "Asincronicitat" i ```fetch```:  
@@ -163,5 +167,6 @@ Cal destacar visualment, en primer lloc, la cèl·la sel·leccionada. Simplement
 
 Al pensar en el sistema per introduir els valors de cada cel·la el més apropiat va semblar crear uns botons a la part inferior amb totes les opcions possibles. Visualment això concorda amb la grid principal i ens serveix perfectament per jugar en telèfon i d'altres dispositius sense afegir massa complicacions.
 
+![Fase03](./src/screenshots/Fase03.png)
 ### Complicacions:
 - Descartem la idea d'utilitzar un input ja que en telèfons apareix el teclat que tapa part de la pantalla i es fa incòmode visualment. A més, la idea inicial de substituir els nombres per símbols ho faria extremadament incòmode. 
