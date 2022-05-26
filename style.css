@@ -42,6 +42,10 @@ ul :hover{
     background-color: tomato;
 }
 
+.wrong {
+    background-color: red;
+}
+
 span {
     margin-top: 0.4rem;
 }

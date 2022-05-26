@@ -1,4 +1,5 @@
-const getButton = document.getElementById('get-btn')
+const getButton = document.getElementById('get-btn');
+const checkButton = document.getElementById('check-btn');
 const grid = document.getElementById("grid");
 const buttonsGrid = document.getElementById("buttons-grid");
 
@@ -21,17 +22,6 @@ async function getPuzzle() {
     solvedPuzzle = data["response"]["solution"];
 }
 
-// function getPuzzle() {
-//     fetch('https://sudoku-board.p.rapidapi.com/new-board?diff=2&stype=list&solu=true', options)
-//         .then(response => response.json())
-//         .then(data => puzzle = data["response"]["unsolved-sudoku"])
-//         .then(console.log(puzzle))
-//         .catch(err => console.error(err));
-
-// }
-
-
-//
 
 function createGrid() {
     for (let i = 0; i <= 80; i++) {
@@ -44,8 +34,8 @@ function createGrid() {
 
 createGrid();
 
-function conCatData() {
-    puzzle = puzzle[0].concat(puzzle[1], puzzle[2], puzzle[3], puzzle[4], puzzle[5], puzzle[6], puzzle[7], puzzle[8])
+function conCatData(data) {
+    return data[0].concat(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8])
 }
 
 function writeSudoku() {
@@ -70,7 +60,9 @@ function writeSudoku() {
 
 getButton.addEventListener("click", async () => {
     await getPuzzle();
-    conCatData();
+    puzzle = conCatData(puzzle);
+    solvedPuzzle = conCatData(solvedPuzzle);
+    console.log(solvedPuzzle);
     writeSudoku();
 })
 
@@ -79,10 +71,10 @@ getButton.addEventListener("click", async () => {
 let selectedTile;
 
 grid.addEventListener("click", (event) => {
-    console.log(event.target);
     if (event.target.classList[0] === "initial-value") return;
     if (selectedTile) selectedTile.classList.remove("selected")
     selectedTile = event.target;
+    selectedTile.classList.remove("wrong")
 
     if (event.target.id != "grid") selectedTile.classList.add("selected")
 });
@@ -95,3 +87,20 @@ buttonsGrid.addEventListener("click", (event) => {
         selectedTile.children[0].alt = `${buttonValue}`;
     }
 });
+
+checkButton.addEventListener("click", () => {
+    checkUserSolution();
+});
+
+function checkUserSolution() {
+    let wrongTiles = 0;
+    //Make a new array with user answers
+    const tiles = [].slice.call(grid.children);
+    for (const [i, tile] of tiles.entries()) {
+        if (tile.children[0].alt != solvedPuzzle[i]) {
+            grid.children[i].classList.add("wrong");
+            wrongTiles++;
+        }
+    }
+    if (wrongTiles > 0) alert(`Wrong answer! you made ${wrongTiles} mistakes`)
+}
