@@ -51,6 +51,8 @@ function writeSudoku() {
         tileImg.src = "";
         tileImg.alt = "";
 
+        tile.classList.remove("initial-value");
+
         if (puzzle[i] > 0) {
             tileImg.src = `./src/img/${puzzle[i]}.png`;
             tileImg.alt = `${puzzle[i]}`;
@@ -97,9 +99,13 @@ grid.addEventListener("click", (event) => {
 //Target selected button to insert
 buttonsGrid.addEventListener("click", (event) => {
     const buttonValue = event.target.alt;
-    if (buttonValue && selectedTile) {
+    if (buttonValue && selectedTile && selectedTile.children[0]) {
         selectedTile.children[0].src = `./src/img/${buttonValue}.png`;
         selectedTile.children[0].alt = `${buttonValue}`;
+    }
+    else if (buttonValue && selectedTile) {
+        selectedTile.src = `./src/img/${buttonValue}.png`;
+        selectedTile.alt = `${buttonValue}`;
     }
 });
 
