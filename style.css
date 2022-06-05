@@ -1,8 +1,13 @@
 body {
-    background-color: #f5d6a5;
-    background-image: url("./src/img/background.png");
+    background-color: #f5d6a5bd;
+    /* background-image: url("./src/img/background.png"); */
     background-repeat: no-repeat;
     background-size: contain;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
 }
 
 ul {
@@ -11,31 +16,48 @@ ul {
     grid-template-rows: repeat(9, 5vw);
     justify-content: center;
     align-content: center;
-    grid-gap: 0rem;
+    grid-gap: 0.2rem;
     list-style: none;
     margin: 0 0 2vw;
     padding: 0;
 }
 
+
+#buttons-grid {
+    grid-template-rows: repeat(1, 5vw);
+}
+
+@media screen and (max-width: 800px) {
+    ul {
+        grid-template-columns: repeat(9, 9vw);
+        grid-template-rows: repeat(9, 9vw);
+        align-self: center;
+    }
+
+    #buttons-grid {
+        grid-template-rows: repeat(1, 9vw);
+    }
+}
+
 li {
     margin: 0;
     padding: 0;
+    background-color: #f5d6a5;
     text-align: center;
-    border-left: 1px solid #326575;
-    border-right: 1px solid #326575;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
+    border-radius: 8px;
 }
 
-li img{
+li img {
     width: 100%;
 }
 
-ul :hover{
-   background-color: cadetblue; 
-   cursor: pointer;
+ul :hover {
+    background-color: cadetblue;
+    cursor: pointer;
 }
 
 .selected {
@@ -48,4 +70,29 @@ ul :hover{
 
 span {
     margin-top: 0.4rem;
+}
+
+#menu-container {
+    position: absolute;
+    background-color: #f86a0bce;
+    width: 100vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#loading {
+    display: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
 }

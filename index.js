@@ -2,6 +2,9 @@ const getButton = document.getElementById('get-btn');
 const checkButton = document.getElementById('check-btn');
 const grid = document.getElementById("grid");
 const buttonsGrid = document.getElementById("buttons-grid");
+const menuContainer = document.getElementById("menu-container");
+const loading = document.getElementById("loading");
+const menuButton = document.getElementById("menu-button");
 
 let puzzle;
 let solvedPuzzle;
@@ -43,6 +46,7 @@ function writeSudoku() {
     for (let i = 0; i <= 80; i++) {
 
         const tileImg = grid.children[i].children[0];
+        const tile = grid.children[i];
 
         tileImg.src = "";
         tileImg.alt = "";
@@ -52,18 +56,29 @@ function writeSudoku() {
             tileImg.alt = `${puzzle[i]}`;
             tileImg.classList.add("initial-value");
         }
-
+        
+        tile.classList.remove("wrong");
     }
 
 }
 
 
 getButton.addEventListener("click", async () => {
+    loading.style.display = 'block';
     await getPuzzle();
+    loading.style.display = 'none';
     puzzle = conCatData(puzzle);
     solvedPuzzle = conCatData(solvedPuzzle);
     console.log(solvedPuzzle);
+    menuContainer.style.display = 'none';
     writeSudoku();
+});
+
+menuButton.addEventListener("click", ()=>{
+    if(menuContainer.style.display === 'none'){
+        menuContainer.style.display = 'flex';
+    }
+    else menuContainer.style.display = 'none';
 })
 
 
@@ -102,5 +117,7 @@ function checkUserSolution() {
             wrongTiles++;
         }
     }
-    if (wrongTiles > 0) alert(`Wrong answer! you made ${wrongTiles} mistakes`)
+    if (wrongTiles > 0) alert(`Wrong answer! you made ${wrongTiles} mistakes`);
+    menuContainer.style.display = 'none';
+
 }
