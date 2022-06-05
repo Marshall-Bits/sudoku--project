@@ -56,16 +56,20 @@ li img {
 }
 
 ul :hover {
-    background-color: cadetblue;
+    background-color: rgba(95, 158, 160, 0.473);
     cursor: pointer;
 }
 
 .selected {
-    background-color: tomato;
+    background-color: rgba(255, 99, 71, 0.308);
 }
 
 .wrong {
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.404);
+}
+
+.initial-value{
+    background-color: rgba(128, 128, 128, 0.137);
 }
 
 span {
@@ -86,6 +90,7 @@ span {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    transition: 300ms;
 }
 
 #loading {
@@ -95,4 +100,8 @@ span {
 button {
     border: none;
     background-color: transparent;
+    border-radius: 5px;
+    color: antiquewhite;
+    font-size: 2em;
+    cursor: pointer;
 }

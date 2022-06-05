@@ -1,3 +1,5 @@
+import {fetchedPuzzle, fetchedSolvedPuzzle, getPuzzle}  from "./src/scripts/api.js";
+
 const getButton = document.getElementById('get-btn');
 const checkButton = document.getElementById('check-btn');
 const grid = document.getElementById("grid");
@@ -6,25 +8,8 @@ const menuContainer = document.getElementById("menu-container");
 const loading = document.getElementById("loading");
 const menuButton = document.getElementById("menu-button");
 
-let puzzle;
-let solvedPuzzle;
-
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Host': 'sudoku-board.p.rapidapi.com',
-        'X-RapidAPI-Key': '5ab38a79c4mshbc78b0c078b897ap1a1767jsn0586e66df467'
-    }
-};
-
-
-async function getPuzzle() {
-    const response = await fetch('https://sudoku-board.p.rapidapi.com/new-board?diff=2&stype=list&solu=true', options);
-    const data = await response.json();
-    puzzle = data["response"]["unsolved-sudoku"];
-    solvedPuzzle = data["response"]["solution"];
-}
-
+let puzzle = fetchedPuzzle;
+let solvedPuzzle = fetchedSolvedPuzzle;
 
 function createGrid() {
     for (let i = 0; i <= 80; i++) {
@@ -69,8 +54,8 @@ getButton.addEventListener("click", async () => {
     loading.style.display = 'block';
     await getPuzzle();
     loading.style.display = 'none';
-    puzzle = conCatData(puzzle);
-    solvedPuzzle = conCatData(solvedPuzzle);
+    puzzle = conCatData(fetchedPuzzle);
+    solvedPuzzle = conCatData(fetchedSolvedPuzzle);
     console.log(solvedPuzzle);
     menuContainer.style.display = 'none';
     writeSudoku();
