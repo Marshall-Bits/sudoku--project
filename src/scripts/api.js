@@ -10,7 +10,7 @@ let fetchedPuzzle;
 let fetchedSolvedPuzzle;
 
 export default async function getPuzzle() {
-    const response = await fetch('https://sudoku-board.p.rapidapi.com/new-board?diff=2&stype=list&solu=true', options);
+    const response = await fetch('https://sudoku-board.p.rapidapi.com/new-board?diff=1&stype=list&solu=true', options);
     const data = await response.json();
     fetchedPuzzle = data["response"]["unsolved-sudoku"];
     fetchedSolvedPuzzle = data["response"]["solution"];

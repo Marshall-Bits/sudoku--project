@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script async type="module" src="./index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
     <script type="module" src="./src/scripts/api.js"></script>
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <div id="menu-button">
-        MENU
-    </div>
+    <img class="menu-button" id="menu-hamb-icon" src="./src/img/menu hamb.png" alt="">
     <div id="menu-container">
-        <h1 id="loading">LOADING</h1>
+        <img class="menu-button" id="menu-close-icon" src="./src/img/menu close.png" alt="">
+        <img class="gif" src="./src/img/porta closedl.gif">
         <button id="get-btn">NEW PUZZLE</button>
-        <button id="check-btn">SEND PUZZLE</button>
+        <button id="check-btn">OPEN PORTAL</button>
+        <img id="loading" src="./src/img/loading.png">
+    </div>
+    <div id="win-container">
+        <h1>Good news traveler!</h1>
+        <img class="gif" src="./src/img/portal.gif" alt="you win!">
+        <p>Space portal unlocked</p>
+        <button id="repeat-btn">Repeat</button>
     </div>
     <main>
         <ul id="grid">
-           
+
         </ul>
     </main>
     <footer>
@@ -37,4 +48,5 @@
         </ul>
     </footer>
 </body>
+
 </html>

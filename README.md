@@ -19,7 +19,9 @@ Desenvolupament
 - [Fase 1: estructura html i css](#fase-1-estructura-html-i-css)
 - [Fase 2: Tests amb API i DOM](#fase-2-tests-amb-api-i-dom)
 - [Fase 3: Testejant interacció de l'usuari](#fase-3-testejant-interacció-de-lusuari)
-- [Fase 4: Sudoku implementat](#fase-4-sudoku-implementat)
+- [Fase 4: Afegint símbols](#fase-4-afegint-símbols)
+- [Fase 5: Sudoku implementat](#fase-5-sudoku-implementat)
+
 ## Descripció 
 
 Aquest és un projecte de creació d'un joc de sudoku partint d'una API que genera els trencaclosques i els resol de manera automàtica. Per donar personalitat a l'aplicació i un toc original els nombres es substitueixen per símbols.
@@ -172,19 +174,31 @@ Al pensar en el sistema per introduir els valors de cada cel·la el més apropia
 ### Complicacions:
 - Descartem la idea d'utilitzar un input ja que en telèfons apareix el teclat que tapa part de la pantalla i es fa incòmode visualment. A més, la idea inicial de substituir els nombres per símbols ho faria extremadament incòmode. 
 
-## Fase 4: Sudoku implementat
+## Fase 4: Afegint símbols
 
-A aquestes alçades ja podem dir que la funcionalitat principal per jugar està implementada. Iniciem dons proves per tal de saber si la solució del trencaclosques que hem aplicat és correcte o no. La mateixa API ja ens envia la solució del trencaclosques així que no caldrà fer una altra crida com passava amb altres APIs.
+Aquesta fase consisteix en substituïr tots els nombres per símbols. Cada símbol està creat amb photoshop amb la intenció de donar-li un toc egipci i relacionat amb el món de l'espai i els viatges espacials. Tenim 3 símbols que pertanyen a a [jeroglifics egipcis](https://es.wikipedia.org/wiki/Jerogl%C3%ADficos_egipcios), uns altres 3 que pertanyen als glifos utilitzats en els viatges de [star gate](https://stargate.fandom.com/wiki/Glyph) i uns altres 3 que pertanyen a la simbologia de [No Man's Sky](https://nomanssky.fandom.com/wiki/Glyph#:~:text=Summary,-In%2Dgame%20Guide&text=Infographics%20Glyphs%20are%20symbols%20on,symbols%20on%20the%20outer%20ring.). 
+
+Cada número és substituït per un dels símbols i, amb la barra de botons inferior, tenim la referència de cadescún.
+
+![Fase04](./src/screenshots/Fase04.png)
+### Complicacions:
+- Per tal de tenir una referència de quin número és cada símbol i d'altres propietas es fa testeig amb els atributs de data d'html. Finalment descartem la opció ja que la única informació rellevant és el número i aquesta dada ja queda emmagatzemada en la propietat "alt" de la imatge. D'altres propietats tenen a veure amb la mateixa classe d'html i, per tant, finalment no és necessari utilitzar els data attributes. 
+
+
+
+## Fase 5: Sudoku implementat
+
+A aquestes alçades ja podem dir que la funcionalitat principal per jugar està implementada. Iniciem doncs proves per tal de saber si la solució del trencaclosques que hem aplicat és correcte o no. La mateixa API ja ens envia la solució del trencaclosques així que no caldrà fer una altra crida com passava amb altres APIs.
 
 Apliquem la següent lògica per tal de veure els errors:
 
 ```javascript
 function checkUserSolution() {
     let wrongTiles = 0;
-    //Make a new array with user answers
+
     const tiles = [].slice.call(grid.children);
     for (const [i, tile] of tiles.entries()) {
-        if (tile.children[0].value != solvedPuzzle[i]) {
+        if (tile.children[0].alt != solvedPuzzle[i]) {
             grid.children[i].classList.add("wrong");
             wrongTiles++;
         }
@@ -196,3 +210,6 @@ function checkUserSolution() {
 ```
 La const tiles ens crearà un array amb totes les cèl·les per tal de poder comprobar les respostes de l'usuari/a.
 El mateix array amb la solució ja el tenim plantejat perquè concordi amb els índex de la grid i d'aquesta manera ens corregeix les cèl·les incorrectes a les cuals afegim la classe "wrong" la qual canviarà el seu color de fons. 
+
+### Complicacions:
+- Cap complicació en aquesta fase.

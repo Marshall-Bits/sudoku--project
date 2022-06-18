@@ -1,4 +1,6 @@
 body {
+    margin: 0;
+    padding: 0;
     background-color: #f5d6a5bd;
     /* background-image: url("./src/img/background.png"); */
     background-repeat: no-repeat;
@@ -6,8 +8,9 @@ body {
     display: flex;
     height: 100vh;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-content: center;
+    font-family: 'Caveat Brush', cursive;
 }
 
 ul {
@@ -53,6 +56,8 @@ li {
 
 li img {
     width: 100%;
+    border-radius: 8px;
+
 }
 
 ul :hover {
@@ -61,7 +66,7 @@ ul :hover {
 }
 
 .selected {
-    background-color: rgba(255, 99, 71, 0.308);
+    background-color: rgba(42, 172, 9, 0.308);
 }
 
 .wrong {
@@ -72,36 +77,98 @@ ul :hover {
     background-color: rgba(128, 128, 128, 0.137);
 }
 
+.initial-value :hover{
+    background-color: rgba(128, 128, 128, 0.137);
+}
+
 span {
     margin-top: 0.4rem;
 }
 
 #menu-container {
     position: absolute;
-    background-color: #f86a0bce;
+    background-color: #f86a0be0;
     width: 100vw;
     height: 100vh;
     margin-left: auto;
     margin-right: auto;
     left: 0;
-    right: 0;
     text-align: center;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
     transition: 300ms;
 }
 
+#win-container{
+    color: #f86a0be0;
+    font-size: 1.5em;
+    position: absolute;
+    background-color: #f5d6a5;
+    width: 100vw;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    top: -100vh;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 300ms;
+}
+
+.menu-button{
+    width: 5vw;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    cursor: pointer;
+}
+
+#menu-hamb-icon{
+    left: -100vw;
+    transition-duration: 300ms;
+}
+
 #loading {
+    position: absolute;
+    top: 40vh;
     display: none;
+    animation: rotate 4s linear infinite;
+    width: 20vw;
+}
+
+@keyframes rotate {
+    from {
+       transform: rotate(0deg);
+      }
+      to {
+        
+        transform: rotate(360deg);
+      }
 }
 
 button {
+    font-family: 'Caveat Brush', cursive;
+    width: 7em;
     border: none;
     background-color: transparent;
     border-radius: 5px;
     color: antiquewhite;
     font-size: 2em;
     cursor: pointer;
+}
+
+#repeat-btn{
+    background-color: #fca746;
+    width: 4em;
+}
+
+.gif{
+    width: 50%;
 }
