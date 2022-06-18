@@ -19,6 +19,7 @@ Desenvolupament
 - [Fase 1: estructura html i css](#fase-1-estructura-html-i-css)
 - [Fase 2: Tests amb API i DOM](#fase-2-tests-amb-api-i-dom)
 - [Fase 3: Testejant interacció de l'usuari](#fase-3-testejant-interacció-de-lusuari)
+- [Fase 4: Sudoku implementat](#fase-4-sudoku-implementat)
 ## Descripció 
 
 Aquest és un projecte de creació d'un joc de sudoku partint d'una API que genera els trencaclosques i els resol de manera automàtica. Per donar personalitat a l'aplicació i un toc original els nombres es substitueixen per símbols.
@@ -170,3 +171,28 @@ Al pensar en el sistema per introduir els valors de cada cel·la el més apropia
 ![Fase03](./src/screenshots/Fase03.png)
 ### Complicacions:
 - Descartem la idea d'utilitzar un input ja que en telèfons apareix el teclat que tapa part de la pantalla i es fa incòmode visualment. A més, la idea inicial de substituir els nombres per símbols ho faria extremadament incòmode. 
+
+## Fase 4: Sudoku implementat
+
+A aquestes alçades ja podem dir que la funcionalitat principal per jugar està implementada. Iniciem dons proves per tal de saber si la solució del trencaclosques que hem aplicat és correcte o no. La mateixa API ja ens envia la solució del trencaclosques així que no caldrà fer una altra crida com passava amb altres APIs.
+
+Apliquem la següent lògica per tal de veure els errors:
+
+```javascript
+function checkUserSolution() {
+    let wrongTiles = 0;
+    //Make a new array with user answers
+    const tiles = [].slice.call(grid.children);
+    for (const [i, tile] of tiles.entries()) {
+        if (tile.children[0].value != solvedPuzzle[i]) {
+            grid.children[i].classList.add("wrong");
+            wrongTiles++;
+        }
+    }
+    if (wrongTiles > 0) alert(`Wrong answer! you made ${wrongTiles} mistakes`);
+    menuContainer.style.display = 'none';
+
+}
+```
+La const tiles ens crearà un array amb totes les cèl·les per tal de poder comprobar les respostes de l'usuari/a.
+El mateix array amb la solució ja el tenim plantejat perquè concordi amb els índex de la grid i d'aquesta manera ens corregeix les cèl·les incorrectes a les cuals afegim la classe "wrong" la qual canviarà el seu color de fons. 
