@@ -162,6 +162,16 @@ button {
     width: 50%;
 }
 
+#timer{
+    margin: 0;
+    padding: 0;
+    color: #00966F;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: large;
+}
+
 @media screen and (max-width: 800px) {
     ul {
         grid-template-columns: repeat(9, 9vw);

@@ -1,4 +1,5 @@
 import { fetchedPuzzle, fetchedSolvedPuzzle, getPuzzle } from "./src/scripts/api.js";
+import { startTimer, stopTimer, resetTimer, timer } from "./src/scripts/timer.js";
 
 const getButton = document.getElementById('get-btn');
 const checkButton = document.getElementById('check-btn');
@@ -10,6 +11,7 @@ const loading = document.getElementById("loading");
 const menuButtonHamb = document.getElementById("menu-hamb-icon");
 const menuButtonClose = document.getElementById("menu-close-icon");
 const repeatButton = document.getElementById("repeat-btn");
+const timerResult = document.getElementById("timerResult");
 
 let puzzle = fetchedPuzzle;
 let solvedPuzzle = fetchedSolvedPuzzle;
@@ -79,6 +81,8 @@ getButton.addEventListener("click", async () => {
     solvedPuzzle = conCatData(fetchedSolvedPuzzle);
     closeMenu();
     writeSudoku();
+    resetTimer();
+    startTimer();
 });
 
 repeatButton.addEventListener("click", () => {
@@ -88,10 +92,12 @@ repeatButton.addEventListener("click", () => {
 
 menuButtonHamb.addEventListener("click", () => {
     openMenu();
+    stopTimer();
 })
 
 menuButtonClose.addEventListener("click", () => {
     closeMenu();
+    startTimer();
 })
 
 checkButton.addEventListener("click", () => {
@@ -154,6 +160,7 @@ function checkUserSolution() {
     else if (wrongTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes`);
     else if (wrongTiles === 0 && blankTiles === 0) {
         openWinMenu();
+        timerResult.innerText = timer;
     };
     closeMenu();
 }

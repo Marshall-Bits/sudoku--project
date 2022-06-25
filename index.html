@@ -10,12 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
     <script type="module" src="./src/scripts/api.js"></script>
+    <script type="module" src="./src/scripts/timer.js"></script>
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
 
 <body>
     <img class="menu-button" id="menu-hamb-icon" src="./src/img/menu hamb.png" alt="">
+    <span id="timer">0:00:00</span>
     <div id="menu-container">
         <h1>SUDO SPACE TRAVELER</h1>
         <img class="menu-button" id="menu-close-icon" src="./src/img/menu close.png" alt="">
@@ -27,7 +29,7 @@
     <div id="win-container">
         <h1>Good news traveler!</h1>
         <img class="gif" src="./src/img/portal.gif" alt="you win!">
-        <p>Space portal unlocked</p>
+        <p>Space portal unlocked in <span id="timerResult"></span></p>
         <button id="repeat-btn">Repeat</button>
     </div>
     <main>
