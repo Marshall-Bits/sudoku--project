@@ -129,53 +129,50 @@ buttonsGrid.addEventListener("click", (event) => {
     else if (buttonValue && selectedTile) {
         selectedTile.src = `./src/img/${buttonValue}.png`;
         selectedTile.alt = `${buttonValue}`;
-    }
+    };
 });
-
 
 function checkUserSolution() {
     let wrongTiles = 0;
     let blankTiles = 0;
     //Make a new array with user answers
     const tiles = [].slice.call(grid.children);
+
     for (const [i, tile] of tiles.entries()) {
         if (!tile.children[0].alt) {
             blankTiles++;
             continue;
-        }
+        };
         if (tile.children[0].alt != solvedPuzzle[i]) {
             grid.children[i].classList.add("wrong");
             wrongTiles++;
-        }
-    }
+        };
+    };
+
     if (wrongTiles > 0 && blankTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes and you are missing ${blankTiles} tiles!`);
     else if (blankTiles > 0) alert(`You are missing ${blankTiles} tiles!`);
     else if (wrongTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes`);
     else if (wrongTiles === 0 && blankTiles === 0) {
         openWinMenu();
-    }
+    };
     closeMenu();
-
 }
 
 // Cheat
 function solveSudoku() {
-
     for (let i = 0; i <= 80; i++) {
 
         const tile = grid.children[i];
-
         tile.classList.remove("initial-value");
 
         if (solvedPuzzle[i] > 0) {
             const tileImg = grid.children[i].children[0];
             tileImg.src = `./src/img/${solvedPuzzle[i]}.png`;
             tileImg.alt = `${solvedPuzzle[i]}`;
-        }
+        };
 
         tile.classList.remove("wrong");
     }
-
 }
 
 document.addEventListener("keypress", (e) => {

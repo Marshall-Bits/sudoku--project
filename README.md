@@ -21,6 +21,7 @@ Desenvolupament
 - [Fase 3: Testejant interacció de l'usuari](#fase-3-testejant-interacció-de-lusuari)
 - [Fase 4: Afegint símbols](#fase-4-afegint-símbols)
 - [Fase 5: Sudoku implementat](#fase-5-sudoku-implementat)
+- [Fase 6: Menú d'inici i pantalla final](#fase-6-menú-dinici-i-pantalla-final)
 
 ## Descripció 
 
@@ -182,7 +183,7 @@ Cada número és substituït per un dels símbols i, amb la barra de botons infe
 
 ![Fase04](./src/screenshots/Fase04.png)
 ### Complicacions:
-- Per tal de tenir una referència de quin número és cada símbol i d'altres propietas es fa testeig amb els atributs de data d'html. Finalment descartem la opció ja que la única informació rellevant és el número i aquesta dada ja queda emmagatzemada en la propietat "alt" de la imatge. D'altres propietats tenen a veure amb la mateixa classe d'html i, per tant, finalment no és necessari utilitzar els data attributes. 
+- Per tal de tenir una referència de quin número és cada símbol i d'altres propietas es fa testeig amb els atributs de data d'html. Finalment descartem l'opció ja que la única informació rellevant és el número i aquesta dada ja queda emmagatzemada en la propietat "alt" de la imatge. D'altres propietats tenen a veure amb la mateixa classe d'html i, per tant, finalment no és necessari utilitzar els data attributes. 
 
 
 
@@ -211,5 +212,12 @@ function checkUserSolution() {
 La const tiles ens crearà un array amb totes les cèl·les per tal de poder comprobar les respostes de l'usuari/a.
 El mateix array amb la solució ja el tenim plantejat perquè concordi amb els índex de la grid i d'aquesta manera ens corregeix les cèl·les incorrectes a les cuals afegim la classe "wrong" la qual canviarà el seu color de fons. 
 
-### Complicacions:
-- Cap complicació en aquesta fase.
+## Fase 6: Menú d'inici i pantalla final
+
+El menú d'inici consisteix en un contenidor que ocuparà tota la pantalla i portarà les opcions d'inici i d'enviar el puzzle per obtenir la seva resolució o informació dels errors que hem comès.
+
+També tindrem l'opció de carregar un nou trencaclosques. 
+
+Un cop enviat el trencaclosques la pantalla final ens indicarà que hem desbloquejat la combinació correcte. 
+
+![Fase06](./src/screenshots/Fase06.png)

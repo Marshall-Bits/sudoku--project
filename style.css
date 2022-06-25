@@ -11,6 +11,7 @@ body {
     justify-content: space-evenly;
     align-content: center;
     font-family: 'Caveat Brush', cursive;
+    color: antiquewhite;
 }
 
 ul {
@@ -28,18 +29,6 @@ ul {
 
 #buttons-grid {
     grid-template-rows: repeat(1, 5vw);
-}
-
-@media screen and (max-width: 800px) {
-    ul {
-        grid-template-columns: repeat(9, 9vw);
-        grid-template-rows: repeat(9, 9vw);
-        align-self: center;
-    }
-
-    #buttons-grid {
-        grid-template-rows: repeat(1, 9vw);
-    }
 }
 
 li {
@@ -73,11 +62,11 @@ ul :hover {
     background-color: rgba(255, 0, 0, 0.404);
 }
 
-.initial-value{
+.initial-value {
     background-color: rgba(128, 128, 128, 0.137);
 }
 
-.initial-value :hover{
+.initial-value :hover {
     background-color: rgba(128, 128, 128, 0.137);
 }
 
@@ -102,7 +91,7 @@ span {
     transition: 300ms;
 }
 
-#win-container{
+#win-container {
     color: #f86a0be0;
     font-size: 1.5em;
     position: absolute;
@@ -122,7 +111,7 @@ span {
     transition: 300ms;
 }
 
-.menu-button{
+.menu-button {
     width: 5vw;
     position: absolute;
     top: 20px;
@@ -130,14 +119,13 @@ span {
     cursor: pointer;
 }
 
-#menu-hamb-icon{
+#menu-hamb-icon {
     left: -100vw;
     transition-duration: 300ms;
 }
 
 #loading {
     position: absolute;
-    top: 40vh;
     display: none;
     animation: rotate 4s linear infinite;
     width: 20vw;
@@ -145,12 +133,13 @@ span {
 
 @keyframes rotate {
     from {
-       transform: rotate(0deg);
-      }
-      to {
-        
+        transform: rotate(0deg);
+    }
+
+    to {
+
         transform: rotate(360deg);
-      }
+    }
 }
 
 button {
@@ -164,11 +153,48 @@ button {
     cursor: pointer;
 }
 
-#repeat-btn{
+#repeat-btn {
     background-color: #fca746;
     width: 4em;
 }
 
-.gif{
+.gif {
     width: 50%;
+}
+
+@media screen and (max-width: 800px) {
+    ul {
+        grid-template-columns: repeat(9, 9vw);
+        grid-template-rows: repeat(9, 9vw);
+        align-self: center;
+    }
+
+    #buttons-grid {
+        grid-template-rows: repeat(1, 9vw);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    ul {
+        grid-template-columns: repeat(9, 3vw);
+        grid-template-rows: repeat(9, 3vw);
+    }
+
+    #buttons-grid {
+        grid-template-rows: repeat(1, 3vw);
+    }
+
+    .menu-button {
+        width: 2vw;
+    }
+
+    .gif {
+        width: 30%;
+    }
+
+    #loading {
+        width: 10vw;
+    }
+
 }
