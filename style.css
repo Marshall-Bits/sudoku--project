@@ -172,6 +172,10 @@ button {
     font-size: large;
 }
 
+#menu-close-icon{
+    display: none;
+}
+
 @media screen and (max-width: 800px) {
     ul {
         grid-template-columns: repeat(9, 9vw);

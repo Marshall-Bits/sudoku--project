@@ -75,6 +75,7 @@ const closeWinMenu = (() => {
 
 getButton.addEventListener("click", async () => {
     loading.style.display = 'block';
+    menuButtonClose.style.display = 'block';
     await getPuzzle();
     loading.style.display = 'none';
     puzzle = conCatData(fetchedPuzzle);
@@ -155,6 +156,17 @@ function checkUserSolution() {
         };
     };
 
+    if (blankTiles === 81) {
+        alert(`The puzzle is empty! Try pressing the NEW PUZZLE button`);
+        return
+    }
+    countWrongAndBlank(wrongTiles, blankTiles)
+    closeMenu();
+    startTimer();
+}
+
+function countWrongAndBlank(wrongTiles, blankTiles) {
+
     if (wrongTiles > 0 && blankTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes and you are missing ${blankTiles} tiles!`);
     else if (blankTiles > 0) alert(`You are missing ${blankTiles} tiles!`);
     else if (wrongTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes`);
@@ -162,7 +174,7 @@ function checkUserSolution() {
         openWinMenu();
         timerResult.innerText = timer;
     };
-    closeMenu();
+
 }
 
 // Cheat
