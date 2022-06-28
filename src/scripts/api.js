@@ -19,7 +19,7 @@ export default async function getPuzzle() {
     fetchedSolvedPuzzle = data["response"]["solution"];
 };
 
-// ⬇ and uncomment this one with some data ⬇
+// ⬇ and uncomment this one with some demo data ⬇
 // export default async function getPuzzle() {
 //     fetchedPuzzle = demoData.unSolvedPuzzle;
 //     fetchedSolvedPuzzle = demoData.solvedPuzzle;
