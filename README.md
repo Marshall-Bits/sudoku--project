@@ -1,6 +1,8 @@
+Marcel Bosch 2022
 
+Projecte final CIFO
 
-# Project Sudoku
+# SUDO SPACE TRAVELER
 
 ## Index 
 [Descripció](#descripció)
@@ -22,11 +24,16 @@ Desenvolupament
 - [Fase 4: Afegint símbols](#fase-4-afegint-símbols)
 - [Fase 5: Sudoku implementat](#fase-5-sudoku-implementat)
 - [Fase 6: Menú d'inici i pantalla final](#fase-6-menú-dinici-i-pantalla-final)
+- [Fase 7: Últims detalls](#fase-7-últims-detalls)
+
+[Backlog](#backlog)
 
 ## Descripció 
 
 Aquest és un projecte de creació d'un joc de sudoku partint d'una API que genera els trencaclosques i els resol de manera automàtica. Per donar personalitat a l'aplicació i un toc original els nombres es substitueixen per símbols.
 
+La nova perspectiva del sudoku afegeix un concepte de joc diferent i igualment jugable. Tot i que a l'inici semblava que la idea de substituïr els números per símbols
+podria incrementar la dificultat del joc finalment, després de fer diverses proves, no ha estat així.
  
 ## Referències API 
  - [API utilitzada: Sudoku Board](https://rapidapi.com/andrewarochukwu/api/sudoku-board/)
@@ -39,7 +46,7 @@ Aquest és un projecte de creació d'un joc de sudoku partint d'una API que gene
 
 | Paràmetre | Tipus     | Descripció                |
 | :-------- | :------- | :------------------------- |
-| `RapidAPI App` | `string` | **Required**. La ID de la API a RapidAPI|
+| `RapidAPI App` | `string` | **Required**. La ID de l'API a RapidAPI|
 | `Request URL` | `string` | **Required**. rapidapi.com |
 | `X-RapidAPI-Host` | `string` | **Required**. Header proporcionat per RapidAPI |
 | `X-RapidAPI-Key` | `enum` | **Required**. Key segons l'usuari |
@@ -53,7 +60,7 @@ Aquest és un projecte de creació d'un joc de sudoku partint d'una API que gene
 
 | Paràmetre | Tipus     | Descripció                |
 | :-------- | :------- | :------------------------- |
-| `RapidAPI App` | `string` | **Required**. La ID de la API a RapidAPI|
+| `RapidAPI App` | `string` | **Required**. La ID de l'API a RapidAPI|
 | `Request URL` | `string` | **Required**. rapidapi.com |
 | `X-RapidAPI-Host` | `string` | **Required**. Header proporcionat per RapidAPI |
 | `X-RapidAPI-Key` | `enum` | **Required**. Key segons l'usuari |
@@ -66,7 +73,7 @@ La idea inicial era crear una pàgina tipus buscador utilitzant una de les
 API del llistat proporcionat: [API personatges disney](https://disneyapi.dev/docs).
 En el buscador es podrien trobar personatges i donar "like" o posar comentaris. 
 
-Al analitzar la API durant l'aprovació de la idea vam veure que només tenia 
+Al analitzar l'API durant l'aprovació de la idea vam veure que només tenia 
 dos endpoints: 
 
 ```javascript
@@ -76,9 +83,9 @@ dos endpoints:
 }
 ```
 
-Això no permetia fer recerques directament a la API i suposava un problema ja que l'únic
+Això no permetia fer recerques directament a l'API i suposava un problema ja que l'únic
 que permetia era obtenir la informació complerta amb el primer GET. La funcionalitat
-desitjada pel projecte de fer diverses crides a la API quedava massa reduïda i, per tant,
+desitjada pel projecte de fer diverses crides a l'API quedava massa reduïda i, per tant,
 descartada.
 
 ## Primera API sudoku descartada
@@ -94,6 +101,8 @@ la targeta de crèdit ja que, un cop superades les 50 cerques, es carregava un i
 
 Aquesta opció doncs, va quedar també descartada degut a que el nivell de peticions
 durant el desenvolupament podia superar les 50 cerques al dia i suposaria un cost. 
+
+<div class="page-break"></div>
 
 # Desenvolupament
 
@@ -117,7 +126,7 @@ No hi ha complicacions en aquest apartat.
 
 Aquesta fase consistia en testejar l'API i la seva relació amb el DOM per tal d'aconseguir renderitzar tots els elements del trencaclosques de manera correcte i veure possibles errors.
 
-La pròpia documentació de la API ja proporciona exemples de com fer les crides amb axios, fetch o XMLHttp.
+La pròpia documentació de l'API ja proporciona exemples de com fer les crides amb axios, fetch o XMLHttp.
 
 La primera prova va ser amb fetch executant una crida i comprovant la correcta resposta guardada en una variable. 
 
@@ -174,6 +183,7 @@ Al pensar en el sistema per introduir els valors de cada cel·la el més apropia
 ![Fase03](./src/screenshots/Fase03.png)
 ### Complicacions:
 - Descartem la idea d'utilitzar un input ja que en telèfons apareix el teclat que tapa part de la pantalla i es fa incòmode visualment. A més, la idea inicial de substituir els nombres per símbols ho faria extremadament incòmode. 
+<div class="page-break"></div>
 
 ## Fase 4: Afegint símbols
 
@@ -182,6 +192,8 @@ Aquesta fase consisteix en substituïr tots els nombres per símbols. Cada símb
 Cada número és substituït per un dels símbols i, amb la barra de botons inferior, tenim la referència de cadescún.
 
 ![Fase04](./src/screenshots/Fase04.png)
+<div class="page-break"></div>
+
 ### Complicacions:
 - Per tal de tenir una referència de quin número és cada símbol i d'altres propietas es fa testeig amb els atributs de data d'html. Finalment descartem l'opció ja que la única informació rellevant és el número i aquesta dada ja queda emmagatzemada en la propietat "alt" de la imatge. D'altres propietats tenen a veure amb la mateixa classe d'html i, per tant, finalment no és necessari utilitzar els data attributes. 
 
@@ -221,3 +233,65 @@ També tindrem l'opció de carregar un nou trencaclosques.
 Un cop enviat el trencaclosques la pantalla final ens indicarà que hem desbloquejat la combinació correcte. 
 
 ![Fase06](./src/screenshots/Fase06.png)
+
+## Fase 7: Últims detalls
+
+Afegim un comptador amb el temps que es triga en resoldre el trencaclosques.
+
+```javascript
+const timerDOM = document.getElementById('timer');
+
+let timer;
+
+let start = false;
+let hours = 0;
+let minutes = `0${0}`;
+let seconds = `0${0}`;
+
+
+const resetTimer = () => {
+    minutes = `0${0}`;
+    seconds = `0${0}`;
+    hours = 0;
+    timer = `${hours}:${minutes}:${seconds}`;
+    timerDOM.innerText = timer;
+};
+
+const stopTimer = () => start = false;
+const startTimer = () => start = true;
+
+setInterval(() => {
+    if (start) {
+        seconds++
+        seconds < 10 ? seconds = `0${seconds}` : seconds = seconds;
+        if (seconds == 60) {
+            minutes++;
+            seconds = `0${0}`;
+            seconds = seconds;
+            minutes < 10 ? minutes = `0${minutes}` : minutes = minutes;
+        }
+        if (minutes == 60) {
+            hours++
+            minutes == 60 ? minutes = `0${0}` : minutes = minutes;
+        }
+        timer = `${hours}:${minutes}:${seconds}`;
+        timerDOM.innerText = timer;
+    }
+}, 1000);
+
+
+export { stopTimer, startTimer, resetTimer, timer };
+```
+L'app setejarà la variable start a true o false segons convingui. En els moments en els que el menú està obert estarà en false ja que el mateix menú actuarà com a pausa.
+Les condicions estàn implementades amb un == ja que el resultat final que mostrem per pantalla és una string degut a que hem de mostrar un 0 davant les unitats més petites de 10 per raons estètiques.
+
+En aquesta fase també s'aplica refactorització movent el contingut de la crida a la API cap a un arxiu separat i aplicant diverses 
+
+# Backlog
+
+A mesura que s'ha anat generant el joc han sorgit diverses idees que no han pogut estar implementades però 
+
+- Afegir nivells de dificultat
+- Afegir sons i música
+- CRUD d'usuaris
+- Ranking de millors puntuacions

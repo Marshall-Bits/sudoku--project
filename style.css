@@ -2,7 +2,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f5d6a5bd;
-    /* background-image: url("./src/img/background.png"); */
     background-repeat: no-repeat;
     background-size: contain;
     display: flex;
@@ -12,6 +11,11 @@ body {
     align-content: center;
     font-family: 'Caveat Brush', cursive;
     color: antiquewhite;
+    text-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+#timer {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
 }
 
 ul {
@@ -46,10 +50,12 @@ li {
 li img {
     width: 100%;
     border-radius: 8px;
-
+    box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.28);
+    transition: 300ms;
 }
 
 ul :hover {
+    transition: 300ms;
     background-color: rgba(95, 158, 160, 0.473);
     cursor: pointer;
 }
@@ -66,7 +72,7 @@ ul :hover {
     background-color: rgba(128, 128, 128, 0.137);
 }
 
-.initial-value :hover {
+ul .initial-value :hover {
     background-color: rgba(128, 128, 128, 0.137);
 }
 
@@ -151,18 +157,38 @@ button {
     color: antiquewhite;
     font-size: 2em;
     cursor: pointer;
+    background-color: #fca746;
+    transition: 300ms;
+    box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+button:hover {
+    background-color: #00966F;
+}
+
+button:focus {
+    margin-top: 3px;
+    box-shadow: none;
 }
 
 #repeat-btn {
-    background-color: #fca746;
     width: 4em;
+}
+
+#get-btn {
+    margin-bottom: 0.5em;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
 }
 
 .gif {
     width: 50%;
 }
 
-#timer{
+#timer {
     margin: 0;
     padding: 0;
     color: #00966F;
@@ -172,7 +198,7 @@ button {
     font-size: large;
 }
 
-#menu-close-icon{
+#menu-close-icon {
     display: none;
 }
 
@@ -185,6 +211,10 @@ button {
 
     #buttons-grid {
         grid-template-rows: repeat(1, 9vw);
+    }
+
+    li img {
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.28);
     }
 }
 

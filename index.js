@@ -17,6 +17,7 @@ let puzzle = fetchedPuzzle;
 let solvedPuzzle = fetchedSolvedPuzzle;
 
 function createGrid() {
+    // Standard sudokus and the response from the API have 81 tiles
     for (let i = 0; i <= 80; i++) {
         const newTile = document.createElement("li");
         const newImg = document.createElement("img");
@@ -28,6 +29,8 @@ function createGrid() {
 createGrid();
 
 function conCatData(data) {
+    // Uncomment next line for testing with demoData
+    // return data
     return data[0].concat(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8])
 }
 
@@ -54,7 +57,7 @@ function writeSudoku() {
 
 }
 
-// Handle menus
+//Handle menus
 const openMenu = (() => {
     menuContainer.style.left = '0';
     menuButtonHamb.style.left = '-100vw';
@@ -73,6 +76,7 @@ const closeWinMenu = (() => {
     winContainer.style.top = "-100vh"
 })
 
+//Handle buttons
 getButton.addEventListener("click", async () => {
     loading.style.display = 'block';
     menuButtonClose.style.display = 'block';
@@ -142,7 +146,7 @@ buttonsGrid.addEventListener("click", (event) => {
 function checkUserSolution() {
     let wrongTiles = 0;
     let blankTiles = 0;
-    //Make a new array with user answers
+    //Make a new array with user answers matching the data that we have from solvedPuzzle
     const tiles = [].slice.call(grid.children);
 
     for (const [i, tile] of tiles.entries()) {
@@ -157,13 +161,15 @@ function checkUserSolution() {
     };
 
     if (blankTiles === 81) {
+        //All tiles empty === there's no game started yet && no API call
         alert(`The puzzle is empty! Try pressing the NEW PUZZLE button`);
         return
-    }
-    countWrongAndBlank(wrongTiles, blankTiles)
+    };
+
+    countWrongAndBlank(wrongTiles, blankTiles);
     closeMenu();
     startTimer();
-}
+};
 
 function countWrongAndBlank(wrongTiles, blankTiles) {
 
@@ -175,9 +181,9 @@ function countWrongAndBlank(wrongTiles, blankTiles) {
         timerResult.innerText = timer;
     };
 
-}
+};
 
-// Cheat
+//Cheat: in order to test final steps you can just press "g" to solve the sudoku,🤫 don't tell anyone 
 function solveSudoku() {
     for (let i = 0; i <= 80; i++) {
 
@@ -192,9 +198,9 @@ function solveSudoku() {
 
         tile.classList.remove("wrong");
     }
-}
+};
 
 document.addEventListener("keypress", (e) => {
     if (!solvedPuzzle) return;
     if (e.key === "q") solveSudoku();
-})
+});
