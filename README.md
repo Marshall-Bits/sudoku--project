@@ -130,7 +130,7 @@ Aquesta fase consistia en testejar l'API i la seva relació amb el DOM per tal d
 
 La pròpia documentació de l'API ja proporciona exemples de com fer les crides amb axios, fetch o XMLHttp.
 
-La primera prova va ser amb fetch executant una crida i comprovant la correcta resposta guardada en una variable. 
+La primera prova va ser amb fetch/.then executant una crida i comprovant la correcta resposta guardada en una variable. 
 
 La data retornada consisteix en un array amb 9 elements (corresponents a les 9 files del sudoku) que contenen un altre array amb els 9 valors de cada cel·la.
 
@@ -171,9 +171,9 @@ Amb aquesta base ja podem imprimir els valors.
 ### Complicacions:
 
 - "Asincronicitat" i ```fetch```:  
-Les proves es van fer executant la funció de "getPuzzle" a l'inici, el comportament era correcte i tots els elements s'imprimien per pantalla al iniciar la pàgina carregant l'script afegint ```async```.   
+Les proves es van fer executant la funció de "getPuzzle" a l'inici, el comportament era correcte i tots els elements s'imprimien per pantalla al iniciar la pàgina carregant l'script afegint ```async``` a la mateixa importació del script de l'html.   
 El problema va sorgir a l'hora d'afegir un botó per tal de fer la crida.  
-Finalment resulta més fàcil fer la petició a l'API a través d'una funció ```async``` ja que quan fem servir un botó de "trigger" per imprimir els elements en pantalla podem fer servir ```await``` i no tindrem errors d'intentar renderitzar sense data. Fent servir ```fetch``` semblava que el codi es feia més extens amb masses línies de ```.then``` i era més difícil de llegir.
+Finalment resulta més fàcil fer la petició a l'API a través d'una funció ```async``` ja que quan fem servir un botó de "trigger" per imprimir els elements en pantalla podem fer servir ```await``` i no tindrem errors d'intentar renderitzar sense data. Fent servir ```fetch().then()``` semblava que el codi es feia més extens amb masses línies de ```.then``` i era més difícil de llegir.
 
 ## Fase 3: Testejant interacció de l'usuari
 
