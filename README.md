@@ -289,9 +289,13 @@ En aquesta fase també s'aplica refactorització movent el contingut de la crida
 
 # Backlog
 
-A mesura que s'ha anat generant el joc han sorgit diverses idees que no han pogut estar implementades però 
+A mesura que s'ha anat generant el joc han sorgit diverses idees que no han pogut estar implementades:
 
 - Afegir nivells de dificultat
 - Afegir sons i música
 - CRUD d'usuaris
 - Ranking de millors puntuacions
+
+Per altra banda, en una de les comunicacions de tutoria va sorgir una proposta de dividir les columnes o cèl·les per grups com passa en altres modalitats de jocs de sudoku i que ressalti una mica més de separació entre els grups de cada 3 cèl·les. Això no ha estat possible implementar-ho a temps degut a que el joc està basat en una grid i els gaps no poden ser diferents depenent de la columna o fila. 
+
+Les proves afegint marges, paddings, hombres, etc no donaven bon resultat estèticament i finalment s'ha optat per no implementar-ho ja que la solució més eficient possiblement sigui dividir el tauler en diverseses grids i replantejar tota la lògica. 
