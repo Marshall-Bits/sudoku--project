@@ -28,6 +28,8 @@ Desenvolupament
 
 [Backlog](#backlog)
 
+[Links del projecte](#links-del-projecte)
+
 ## Descripció 
 
 Aquest és un projecte de creació d'un joc de sudoku partint d'una API que genera els trencaclosques i els resol de manera automàtica. Per donar personalitat a l'aplicació i un toc original els nombres es substitueixen per símbols.
@@ -299,3 +301,9 @@ A mesura que s'ha anat generant el joc han sorgit diverses idees que no han pogu
 Per altra banda, en una de les comunicacions de tutoria va sorgir una proposta de dividir les columnes o cèl·les per grups com passa en altres modalitats de jocs de sudoku i que ressalti una mica més de separació entre els grups de cada 3 cèl·les. Això no ha estat possible implementar-ho a temps degut a que el joc està basat en una grid i els gaps no poden ser diferents depenent de la columna o fila. 
 
 Les proves afegint marges, paddings, hombres, etc no donaven bon resultat estèticament i finalment s'ha optat per no implementar-ho ja que la solució més eficient possiblement sigui dividir el tauler en diverseses grids i replantejar tota la lògica. 
+
+# Links del projecte
+
+## [Repositori github](https://github.com/Marshall-Bits/sudoku--project)
+
+## [App a github pages](https://marshall-bits.github.io/sudoku--project/)
