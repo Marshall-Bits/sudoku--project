@@ -1,206 +1,294 @@
-import { fetchedPuzzle, fetchedSolvedPuzzle, getPuzzle } from "./src/scripts/api.js";
-import { startTimer, stopTimer, resetTimer, timer } from "./src/scripts/timer.js";
+import {
+  fetchedPuzzle,
+  fetchedSolvedPuzzle,
+  getPuzzle,
+} from "./src/scripts/api.js";
+import {
+  startTimer,
+  stopTimer,
+  resetTimer,
+  timer,
+} from "./src/scripts/timer.js";
 
-const getButton = document.getElementById('get-btn');
-const checkButton = document.getElementById('check-btn');
-const grid = document.getElementById("grid");
-const buttonsGrid = document.getElementById("buttons-grid");
-const menuContainer = document.getElementById("menu-container");
-const winContainer = document.getElementById("win-container");
-const loading = document.getElementById("loading");
-const menuButtonHamb = document.getElementById("menu-hamb-icon");
-const menuButtonClose = document.getElementById("menu-close-icon");
-const repeatButton = document.getElementById("repeat-btn");
-const timerResult = document.getElementById("timerResult");
+// ==================== Constants ====================
+const SELECTORS = {
+  getButton: "get-btn",
+  checkButton: "check-btn",
+  grid: "grid",
+  buttonsGrid: "buttons-grid",
+  menuContainer: "menu-container",
+  winContainer: "win-container",
+  loading: "loading",
+  menuButtonHamb: "menu-hamb-icon",
+  menuButtonClose: "menu-close-icon",
+  repeatButton: "repeat-btn",
+  timerResult: "timerResult",
+};
 
+const GRID_SIZE = 81;
+
+// ==================== DOM Elements ====================
+const elements = Object.entries(SELECTORS).reduce((acc, [key, id]) => {
+  acc[key] = document.getElementById(id);
+  return acc;
+}, {});
+
+// ==================== State ====================
 let puzzle = fetchedPuzzle;
 let solvedPuzzle = fetchedSolvedPuzzle;
+let selectedTile = null;
 
-function createGrid() {
-    // Standard sudokus and the response from the API have 81 tiles
-    for (let i = 0; i <= 80; i++) {
-        const newTile = document.createElement("li");
-        const newImg = document.createElement("img");
-        grid.appendChild(newTile);
-        newTile.appendChild(newImg);
-    }
-}
+// ==================== Utility Functions ====================
 
-createGrid();
+/**
+ * Concatenates a 2D array into a 1D array.
+ * @param {Array<Array<number>>} data - The 2D array to concatenate.
+ * @returns {Array<number>} - The concatenated 1D array.
+ */
+const concatenatePuzzleData = (data) => data.flat();
 
-function conCatData(data) {
-    // Uncomment next line to test with demoData
-    // return data
-    return data[0].concat(data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8])
-}
+/**
+ * Creates the Sudoku grid by appending tiles to the grid element.
+ */
+const createGrid = () => {
+  // by creating a document fragment we can append all the tiles at once
+  // this is, in terms of performance, better than appending them one by one
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < GRID_SIZE; i++) {
+    const tile = document.createElement("li");
+    const tileImg = document.createElement("img");
+    tile.appendChild(tileImg);
+    fragment.appendChild(tile);
+  }
+  elements.grid.appendChild(fragment);
+};
 
-function writeSudoku() {
+/**
+ * Initializes the Sudoku grid with the current puzzle.
+ */
+const initializeGrid = () => {
+  Array.from(elements.grid.children).forEach((tile, index) => {
+    const tileImg = tile.querySelector("img");
+    const value = puzzle[index];
 
-    for (let i = 0; i <= 80; i++) {
+    tileImg.src = value > 0 ? `./src/img/${value}.png` : "";
+    tileImg.alt = value > 0 ? `${value}` : "";
+    tile.classList.toggle("initial-value", value > 0);
+    tile.classList.remove("wrong");
+  });
+};
 
-        const tile = grid.children[i];
-        const tileImg = grid.children[i].children[0];
+/**
+ * Opens a specified menu.
+ * @param {HTMLElement} menu - The menu element to open.
+ * @param {HTMLElement} hideButton - The button to hide when the menu is open.
+ */
+const openMenu = (menu, hideButton) => {
+  menu.style.left = "0";
+  if (hideButton) hideButton.style.left = "-100vw";
+};
 
-        // Initialize blank tiles
-        tileImg.src = "";
-        tileImg.alt = "";
-        tile.classList.remove("initial-value");
-        tile.classList.remove("wrong");
+/**
+ * Closes a specified menu.
+ * @param {HTMLElement} menu - The menu element to close.
+ * @param {HTMLElement} showButton - The button to show when the menu is closed.
+ */
+const closeMenu = (menu, showButton) => {
+  menu.style.left = "-100vw";
+  if (showButton) showButton.style.left = "10px";
+};
 
-        if (puzzle[i] > 0) {
-            tileImg.src = `./src/img/${puzzle[i]}.png`;
-            tileImg.alt = `${puzzle[i]}`;
-            tileImg.classList.add("initial-value");
-        }
+/**
+ * Opens the win menu.
+ */
+const openWinMenu = () => {
+  elements.winContainer.style.top = "0";
+};
 
-    }
+/**
+ * Closes the win menu.
+ */
+const closeWinMenu = () => {
+  elements.winContainer.style.top = "-100vh";
+};
 
-}
+/**
+ * Handles tile selection in the grid.
+ * @param {Event} event - The click event.
+ */
+const handleGridClick = (event) => {
+  const clickedElement = event.target;
+  if (selectedTile?.contains(clickedElement)) {
+    clearSelectedTile();
+    return;
+  }
 
-//Handle menus
-const openMenu = (() => {
-    menuContainer.style.left = '0';
-    menuButtonHamb.style.left = '-100vw';
-})
+  if (clickedElement.classList.contains("initial-value")) return;
 
-const closeMenu = (() => {
-    menuContainer.style.left = '-100vw';
-    menuButtonHamb.style.left = '10px';
-})
+  deselectCurrentTile();
 
-const openWinMenu = (() => {
-    winContainer.style.top = "0"
-})
+  selectedTile =
+    clickedElement.tagName === "IMG"
+      ? clickedElement.parentElement
+      : clickedElement;
+  selectedTile.classList.add("selected");
+};
 
-const closeWinMenu = (() => {
-    winContainer.style.top = "-100vh"
-})
+/**
+ * Clears the currently selected tile.
+ */
+const clearSelectedTile = () => {
+  if (selectedTile) {
+    const tileImg = selectedTile.querySelector("img");
+    tileImg.src = "";
+    tileImg.alt = "";
+    selectedTile.classList.remove("selected");
+    selectedTile = null;
+  }
+};
 
-//Handle buttons
-getButton.addEventListener("click", async () => {
-    loading.style.display = 'block';
-    menuButtonClose.style.display = 'block';
-    await getPuzzle();
-    loading.style.display = 'none';
-    puzzle = conCatData(fetchedPuzzle);
-    solvedPuzzle = conCatData(fetchedSolvedPuzzle);
-    closeMenu();
-    writeSudoku();
-    resetTimer();
-    startTimer();
-});
+/**
+ * Deselects the currently selected tile.
+ */
+const deselectCurrentTile = () => {
+  if (selectedTile) {
+    selectedTile.classList.remove("selected");
+    selectedTile = null;
+  }
+};
 
-repeatButton.addEventListener("click", () => {
-    openMenu();
-    closeWinMenu();
-})
+/**
+ * Handles symbol button clicks to insert numbers into the selected tile.
+ * @param {Event} event - The click event.
+ */
+const handleButtonClick = (event) => {
+  const button = event.target;
+  const value = button.alt;
 
-menuButtonHamb.addEventListener("click", () => {
-    openMenu();
-    stopTimer();
-})
+  if (!value || !selectedTile) return;
 
-menuButtonClose.addEventListener("click", () => {
-    closeMenu();
-    startTimer();
-})
-
-checkButton.addEventListener("click", () => {
-    checkUserSolution();
-});
-
-//Target selected tile
-let selectedTile;
-
-grid.addEventListener("click", (event) => {
-    if (selectedTile?.children[0] === event.target) {
-        selectedTile.children[0].src = "";
-        selectedTile.children[0].alt = "";
-        return
-    }
-    if (event.target.classList[0] === "initial-value") return;
-    // Remove previous selected tile
-    if (selectedTile) selectedTile.classList.remove("selected")
-
-    // Selected tile will allways be the <li> element
-    !event.target.children[0] ? selectedTile = event.target.parentNode : selectedTile = event.target;
-
+  const tileImg = selectedTile.querySelector("img");
+  if (tileImg) {
+    tileImg.src = `./src/img/${value}.png`;
+    tileImg.alt = `${value}`;
     selectedTile.classList.remove("wrong");
-    if (event.target.id != "grid") selectedTile.classList.add("selected");
-});
+  }
+};
 
-//Target selected symbol to insert
-buttonsGrid.addEventListener("click", (event) => {
-    const buttonValue = event.target.alt;
-    if (buttonValue && selectedTile && selectedTile.children[0]) {
-        selectedTile.children[0].src = `./src/img/${buttonValue}.png`;
-        selectedTile.children[0].alt = `${buttonValue}`;
-        selectedTile.classList.remove("wrong");
+/**
+ * Checks the user's solution against the solved puzzle.
+ */
+const checkUserSolution = () => {
+  let wrongTiles = 0;
+  let blankTiles = 0;
+
+  Array.from(elements.grid.children).forEach((tile, index) => {
+    const userValue = tile.querySelector("img").alt;
+    const correctValue = solvedPuzzle[index];
+
+    if (!userValue) {
+      blankTiles++;
+      return;
     }
-    else if (buttonValue && selectedTile) {
-        selectedTile.src = `./src/img/${buttonValue}.png`;
-        selectedTile.alt = `${buttonValue}`;
-    };
-});
 
-function checkUserSolution() {
-    let wrongTiles = 0;
-    let blankTiles = 0;
-    //Make a new array with user answers matching the data that we have from solvedPuzzle
-    const tiles = [].slice.call(grid.children);
-
-    for (const [i, tile] of tiles.entries()) {
-        if (!tile.children[0].alt) {
-            blankTiles++;
-            continue;
-        };
-        if (tile.children[0].alt != solvedPuzzle[i]) {
-            grid.children[i].classList.add("wrong");
-            wrongTiles++;
-        };
-    };
-
-    if (blankTiles === 81) {
-        //All tiles empty === there's no game started yet && no API call
-        alert(`The puzzle is empty! Try pressing the NEW PUZZLE button`);
-        return
-    };
-
-    countWrongAndBlank(wrongTiles, blankTiles);
-    closeMenu();
-    startTimer();
-};
-
-function countWrongAndBlank(wrongTiles, blankTiles) {
-
-    if (wrongTiles > 0 && blankTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes and you are missing ${blankTiles} tiles!`);
-    else if (blankTiles > 0) alert(`You are missing ${blankTiles} tiles!`);
-    else if (wrongTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes`);
-    else if (wrongTiles === 0 && blankTiles === 0) {
-        openWinMenu();
-        timerResult.innerText = timer;
-    };
-
-};
-
-//Cheat: in order to test final steps you can just press "g" to solve the sudoku,🤫 don't tell anyone 
-function solveSudoku() {
-    for (let i = 0; i <= 80; i++) {
-
-        const tile = grid.children[i];
-        tile.classList.remove("initial-value");
-
-        if (solvedPuzzle[i] > 0) {
-            const tileImg = grid.children[i].children[0];
-            tileImg.src = `./src/img/${solvedPuzzle[i]}.png`;
-            tileImg.alt = `${solvedPuzzle[i]}`;
-        };
-
-        tile.classList.remove("wrong");
+    if (userValue !== `${correctValue}`) {
+      tile.classList.add("wrong");
+      wrongTiles++;
     }
+  });
+
+  if (blankTiles === GRID_SIZE) {
+    alert("The puzzle is empty! Try pressing the NEW PUZZLE button.");
+    return;
+  }
+
+  displayResult(wrongTiles, blankTiles);
+  closeMenu(elements.menuContainer, elements.menuButtonClose);
+  startTimer();
 };
 
-document.addEventListener("keypress", (e) => {
-    if (!solvedPuzzle) return;
-    if (e.key === "q") solveSudoku();
+/**
+ * Displays the result based on the number of wrong and blank tiles.
+ * @param {number} wrongTiles - The count of wrong tiles.
+ * @param {number} blankTiles - The count of blank tiles.
+ */
+const displayResult = (wrongTiles, blankTiles) => {
+  if (wrongTiles > 0 && blankTiles > 0) {
+    alert(
+      `Wrong! You made ${wrongTiles} mistakes and are missing ${blankTiles} tiles!`
+    );
+  } else if (blankTiles > 0) {
+    alert(`You are missing ${blankTiles} tiles!`);
+  } else if (wrongTiles > 0) {
+    alert(`Wrong! You made ${wrongTiles} mistakes.`);
+  } else {
+    openWinMenu();
+    elements.timerResult.innerText = timer;
+  }
+};
+/**
+ * Solves the Sudoku by filling in all correct values.
+ */
+const solveSudoku = () => {
+  Array.from(elements.grid.children).forEach((tile, index) => {
+    tile.classList.remove("initial-value", "wrong");
+    const tileImg = tile.querySelector("img");
+    const value = solvedPuzzle[index];
+
+    if (value > 0) {
+      tileImg.src = `./src/img/${value}.png`;
+      tileImg.alt = `${value}`;
+    }
+  });
+};
+
+/**
+ * Handles keyboard shortcuts.
+ * @param {KeyboardEvent} event - The keypress event.
+ */
+const handleKeyPress = (event) => {
+  if (event.key === "q") {
+    solveSudoku();
+  }
+};
+// ==================== Event Listeners ====================
+elements.getButton.addEventListener("click", async () => {
+  elements.loading.style.display = "block";
+  elements.menuButtonClose.style.display = "block";
+
+  await getPuzzle();
+
+  elements.loading.style.display = "none";
+  puzzle = concatenatePuzzleData(fetchedPuzzle);
+  solvedPuzzle = concatenatePuzzleData(fetchedSolvedPuzzle);
+
+  closeMenu(elements.menuContainer, elements.menuButtonHamb);
+  initializeGrid();
+  resetTimer();
+  startTimer();
 });
+
+elements.repeatButton.addEventListener("click", () => {
+  openMenu(elements.menuContainer, elements.menuButtonHamb);
+  closeWinMenu();
+});
+
+elements.menuButtonHamb.addEventListener("click", () => {
+  openMenu(elements.menuContainer, elements.menuButtonHamb);
+  stopTimer();
+});
+
+elements.menuButtonClose.addEventListener("click", () => {
+  closeMenu(elements.menuContainer, elements.menuButtonClose);
+  startTimer();
+});
+
+elements.checkButton.addEventListener("click", checkUserSolution);
+
+elements.grid.addEventListener("click", handleGridClick);
+elements.buttonsGrid.addEventListener("click", handleButtonClick);
+document.addEventListener("keypress", handleKeyPress);
+
+// ==================== Initialization ====================
+createGrid();
+initializeGrid();
