@@ -1,23 +1,42 @@
-// import { fetchedPuzzle, fetchedSolvedPuzzle, getPuzzle } from "./src/scripts/api.js";
 import {
   startTimer,
   stopTimer,
   resetTimer,
   timer,
 } from "./src/scripts/timer.js";
+
 import { generateSudoku } from "./src/scripts/create-sudoku.js";
 
-const getButton = document.getElementById("get-btn");
-const checkButton = document.getElementById("check-btn");
-const grid = document.getElementById("grid");
-const buttonsGrid = document.getElementById("buttons-grid");
-const menuContainer = document.getElementById("menu-container");
-const winContainer = document.getElementById("win-container");
-const loading = document.getElementById("loading");
-const menuButtonHamb = document.getElementById("menu-hamb-icon");
-const menuButtonClose = document.getElementById("menu-close-icon");
-const repeatButton = document.getElementById("repeat-btn");
-const timerResult = document.getElementById("timerResult");
+const SELECTORS = {
+  getButton: "get-btn",
+  checkButton: "check-btn",
+  grid: "grid",
+  buttonsGrid: "buttons-grid",
+  menuContainer: "menu-container",
+  winContainer: "win-container",
+  loading: "loading",
+  menuButtonHamb: "menu-hamb-icon",
+  menuButtonClose: "menu-close-icon",
+  repeatButton: "repeat-btn",
+  timerResult: "timerResult",
+};
+
+const {
+  getButton,
+  checkButton,
+  grid,
+  buttonsGrid,
+  menuContainer,
+  winContainer,
+  loading,
+  menuButtonHamb,
+  menuButtonClose,
+  repeatButton,
+  timerResult,
+} = Object.entries(SELECTORS).reduce((acc, [key, id]) => {
+  acc[key] = document.getElementById(id);
+  return acc;
+}, {});
 
 let puzzle;
 let solvedPuzzle;
@@ -175,7 +194,7 @@ function checkUserSolution() {
   }
 
   if (blankTiles === 81) {
-    //All tiles empty === there's no game started yet && no API call
+    //All tiles empty === there's no game started yet && no sudoku to check
     alert(`The puzzle is empty! Try pressing the NEW PUZZLE button`);
     return;
   }
