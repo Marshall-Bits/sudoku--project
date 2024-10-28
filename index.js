@@ -48,6 +48,18 @@ function createGrid() {
     const newImg = document.createElement("img");
     grid.appendChild(newTile);
     newTile.appendChild(newImg);
+
+    if ((i + 1) % 9 === 0 && (i + 1) % 3 === 0) {
+      newTile.classList.add("right-border");
+    } else if ((i + 1) % 3 === 0) {
+      newTile.classList.add("right-border");
+    }
+
+    if (i >= 18 && i <= 26) {
+      newTile.classList.add("bottom-border");
+    } else if (i >= 45 && i <= 53) {
+      newTile.classList.add("bottom-border");
+    }
   }
 }
 

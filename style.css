@@ -1,255 +1,267 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #f5d6a5bd;
-    background-repeat: no-repeat;
-    background-size: contain;
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-content: center;
-    font-family: 'Caveat Brush', cursive;
-    color: antiquewhite;
-    text-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+  margin: 0;
+  padding: 0;
+  background-color: #f5d6a5bd;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
+  font-family: "Caveat Brush", cursive;
+  color: antiquewhite;
+  text-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
 }
 
 #timer {
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.28);
 }
 
 ul {
-    display: grid;
-    grid-template-columns: repeat(9, 5vw);
-    grid-template-rows: repeat(9, 5vw);
-    justify-content: center;
-    align-content: center;
-    grid-gap: 0.2rem;
-    list-style: none;
-    margin: 0 0 2vw;
-    padding: 0;
+  display: grid;
+  grid-template-columns: repeat(9, 5vw);
+  grid-template-rows: repeat(9, 5vw);
+  justify-content: center;
+  align-content: center;
+  grid-gap: 0.4rem;
+  list-style: none;
+  margin: 0 0 2vw;
+  padding: 0;
+}
+
+.right-border {
+  border-right: 3px solid #fca746; 
+}
+
+.bottom-border {
+  border-bottom: 3px solid #fca746; 
 }
 
 .main-title {
-    font-family: 'Rubik Moonrocks', cursive;
-    font-size: 3em;
+  font-family: "Rubik Moonrocks", cursive;
+  font-size: 3em;
 }
 
 #buttons-grid {
-    grid-template-rows: repeat(1, 5vw);
+  grid-template-rows: repeat(1, 5vw);
 }
 
 li {
-    margin: 0;
-    padding: 0;
-    background-color: #f5d6a5;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  background-color: #f5d6a5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  border-radius: 8px;
 }
 
 li img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.28);
-    transition: 300ms;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.28);
+  transition: 300ms;
 }
 
 ul :hover {
-    transition: 300ms;
-    background-color: rgba(95, 158, 160, 0.473);
-    cursor: pointer;
+  transition: 300ms;
+  background-color: rgba(95, 158, 160, 0.473);
+  cursor: pointer;
 }
 
 .selected {
-    background-color: rgba(42, 172, 9, 0.308);
+  background-color: rgba(42, 172, 9, 0.308);
 }
 
 .wrong {
-    background-color: rgba(255, 0, 0, 0.404);
+  background-color: rgba(255, 0, 0, 0.404);
 }
 
 .initial-value {
-    background-color: rgba(128, 128, 128, 0.137);
+  background-color: rgba(128, 128, 128, 0.137);
 }
 
 ul .initial-value :hover {
-    background-color: rgba(128, 128, 128, 0.137);
+  background-color: rgba(128, 128, 128, 0.137);
 }
 
 span {
-    margin-top: 0.4rem;
+  margin-top: 0.4rem;
 }
 
 #menu-container {
-    position: absolute;
-    background: rgb(255, 225, 204);
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.912) 0%, rgba(248, 106, 11, 1) 100%);
-    width: 100vw;
-    height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    text-align: center;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 300ms;
+  position: absolute;
+  background: rgb(255, 225, 204);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.912) 0%,
+    rgba(248, 106, 11, 1) 100%
+  );
+  width: 100vw;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms;
 }
 
 #win-container {
-    color: #f86a0be0;
-    font-size: 1.5em;
-    position: absolute;
-    background: rgb(255, 190, 86);
-    background: linear-gradient(0deg, rgba(255, 190, 86, 1) 0%, rgba(245, 214, 165, 1) 100%);
-    width: 100vw;
-    height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    top: -100vh;
-    text-align: center;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 300ms;
+  color: #f86a0be0;
+  font-size: 1.5em;
+  position: absolute;
+  background: rgb(255, 190, 86);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 190, 86, 1) 0%,
+    rgba(245, 214, 165, 1) 100%
+  );
+  width: 100vw;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  top: -100vh;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms;
 }
 
 .menu-button {
-    width: 5vw;
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    cursor: pointer;
+  width: 5vw;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  cursor: pointer;
 }
 
 #menu-hamb-icon {
-    left: -100vw;
-    transition-duration: 300ms;
+  left: -100vw;
+  transition-duration: 300ms;
 }
 
 #loading {
-    position: absolute;
-    display: none;
-    animation: rotate 4s linear infinite;
-    width: 20vw;
+  position: absolute;
+  display: none;
+  animation: rotate 4s linear infinite;
+  width: 20vw;
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
 
-    to {
-
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 button {
-    font-family: 'Caveat Brush', cursive;
-    width: 7em;
-    border: none;
-    background-color: transparent;
-    border-radius: 5px;
-    color: antiquewhite;
-    font-size: 2em;
-    cursor: pointer;
-    background-color: #fca746;
-    transition: 300ms;
-    box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+  font-family: "Caveat Brush", cursive;
+  width: 7em;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  color: antiquewhite;
+  font-size: 2em;
+  cursor: pointer;
+  background-color: #fca746;
+  transition: 300ms;
+  box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
 }
 
 button:hover {
-    background-color: #00966F;
+  background-color: #00966f;
 }
 
 button:focus {
-    margin-top: 3px;
-    box-shadow: none;
+  margin-top: 3px;
+  box-shadow: none;
 }
 
 #repeat-btn {
-    width: 4em;
+  width: 4em;
 }
 
 #get-btn {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .btn-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .gif {
-    width: 50%;
+  width: 50%;
 }
 
 #timer {
-    margin: 0;
-    padding: 0;
-    color: #00966F;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: large;
+  margin: 0;
+  padding: 0;
+  color: #00966f;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: large;
 }
 
 #menu-close-icon {
-    display: none;
+  display: none;
 }
 
 @media screen and (max-width: 800px) {
-    ul {
-        grid-template-columns: repeat(9, 9vw);
-        grid-template-rows: repeat(9, 9vw);
-        align-self: center;
-    }
+  ul {
+    grid-template-columns: repeat(9, 9vw);
+    grid-template-rows: repeat(9, 9vw);
+    align-self: center;
+  }
 
-    #buttons-grid {
-        grid-template-rows: repeat(1, 9vw);
-    }
+  #buttons-grid {
+    grid-template-rows: repeat(1, 9vw);
+  }
 
-    li img {
-        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.28);
-    }
+  li img {
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.28);
+  }
 
-    .main-title {
-        font-size: 2em;
-    }
+  .main-title {
+    font-size: 2em;
+  }
 }
 
 @media screen and (min-width: 1200px) {
+  ul {
+    grid-template-columns: repeat(9, 3vw);
+    grid-template-rows: repeat(9, 3vw);
+  }
 
-    ul {
-        grid-template-columns: repeat(9, 3vw);
-        grid-template-rows: repeat(9, 3vw);
-    }
+  #buttons-grid {
+    grid-template-rows: repeat(1, 3vw);
+  }
 
-    #buttons-grid {
-        grid-template-rows: repeat(1, 3vw);
-    }
+  .menu-button {
+    width: 2vw;
+  }
 
-    .menu-button {
-        width: 2vw;
-    }
+  .gif {
+    width: 30%;
+  }
 
-    .gif {
-        width: 30%;
-    }
-
-    #loading {
-        width: 10vw;
-    }
-
+  #loading {
+    width: 10vw;
+  }
 }
-
