@@ -278,6 +278,7 @@ In this phase, we also refactor the code, moving the API call content to a separ
 After some time without working on the project, I revisited it from time to time realizing that the API used was not working anymore or taking too long to respond.
 
 On this update I added a script in the `scripts` folder that generates a new puzzle and the solution, this function is called instead of the API call.  It also has a difficulty parameter.
+This made the whole process much faster and more reliable.
 
 # Backlog
 
