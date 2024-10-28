@@ -1,60 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script async type="module" src="./index.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="./src/img/loading.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap" rel="stylesheet">
-    <script type="module" src="./src/scripts/api.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="shortcut icon"
+      href="./src/img/loading.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap"
+      rel="stylesheet"
+    />
     <script type="module" src="./src/scripts/timer.js"></script>
     <script type="module" src="./src/scripts/demoData.js"></script>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <title>Sudo space traveler</title>
-</head>
+  </head>
 
-<body>
-    <img class="menu-button" id="menu-hamb-icon" src="./src/img/menu hamb.png" alt="">
+  <body>
+    <img
+      class="menu-button"
+      id="menu-hamb-icon"
+      src="./src/img/menu hamb.png"
+      alt=""
+    />
     <span id="timer">0:00:00</span>
     <div id="menu-container">
-        <h1 class="main-title">SUDO SPACE TRAVELER</h1>
-        <img class="menu-button" id="menu-close-icon" src="./src/img/menu close.png" alt="">
-        <img class="gif" src="./src/img/porta closedl.gif">
-        <div class="btn-container">
-            <button id="get-btn">NEW PUZZLE</button>
-            <button id="check-btn">OPEN PORTAL</button>
-        </div>
-        <img id="loading" src="./src/img/loading.png">
+      <h1 class="main-title">SUDO SPACE TRAVELER</h1>
+      <img
+        class="menu-button"
+        id="menu-close-icon"
+        src="./src/img/menu close.png"
+        alt=""
+      />
+      <img class="gif" src="./src/img/porta closedl.gif" />
+      <div class="btn-container">
+        <button id="get-btn">NEW PUZZLE</button>
+        <button id="check-btn">OPEN PORTAL</button>
+      </div>
+      <img id="loading" src="./src/img/loading.png" />
     </div>
     <div id="win-container">
-        <h1>Good news traveler!</h1>
-        <img class="gif" src="./src/img/portal.gif" alt="you win!">
-        <p>Space portal unlocked in <span id="timerResult"></span></p>
-        <button id="repeat-btn">Repeat</button>
+      <h1>Good news traveler!</h1>
+      <img class="gif" src="./src/img/portal.gif" alt="you win!" />
+      <p>Space portal unlocked in <span id="timerResult"></span></p>
+      <button id="repeat-btn">Repeat</button>
     </div>
     <main>
-        <ul id="grid">
-
-        </ul>
+      <ul id="grid"></ul>
     </main>
     <footer>
-        <ul id="buttons-grid">
-            <li><img src="./src/img/1.png" alt="1"></li>
-            <li><img src="./src/img/2.png" alt="2"></li>
-            <li><img src="./src/img/3.png" alt="3"></li>
-            <li><img src="./src/img/4.png" alt="4"></li>
-            <li><img src="./src/img/5.png" alt="5"></li>
-            <li><img src="./src/img/6.png" alt="6"></li>
-            <li><img src="./src/img/7.png" alt="7"></li>
-            <li><img src="./src/img/8.png" alt="8"></li>
-            <li><img src="./src/img/9.png" alt="9"></li>
-        </ul>
+      <ul id="buttons-grid">
+        <li><img src="./src/img/1.png" alt="1" /></li>
+        <li><img src="./src/img/2.png" alt="2" /></li>
+        <li><img src="./src/img/3.png" alt="3" /></li>
+        <li><img src="./src/img/4.png" alt="4" /></li>
+        <li><img src="./src/img/5.png" alt="5" /></li>
+        <li><img src="./src/img/6.png" alt="6" /></li>
+        <li><img src="./src/img/7.png" alt="7" /></li>
+        <li><img src="./src/img/8.png" alt="8" /></li>
+        <li><img src="./src/img/9.png" alt="9" /></li>
+      </ul>
     </footer>
-</body>
-
+  </body>
 </html>
