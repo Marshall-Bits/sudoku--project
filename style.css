@@ -24,7 +24,7 @@ ul {
   grid-template-rows: repeat(9, 5vw);
   justify-content: center;
   align-content: center;
-  grid-gap: 0.4rem;
+  grid-gap: 0.4em;
   list-style: none;
   margin: 0 0 2vw;
   padding: 0;
@@ -89,7 +89,7 @@ ul .initial-value :hover {
 }
 
 span {
-  margin-top: 0.4rem;
+  margin-top: 0.4em;
 }
 
 #menu-container {
@@ -132,7 +132,7 @@ span {
   top: -100vh;
   text-align: center;
   border-radius: 8px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -171,22 +171,21 @@ span {
 
 button {
   font-family: "Caveat Brush", cursive;
-  width: 6em; /* Adjusted size */
+  width: 6em;
   border: none;
   background-color: transparent;
   border-radius: 5px;
   color: antiquewhite;
-  font-size: 1.5em; /* Adjusted size */
+  font-size: 1.5em;
   cursor: pointer;
   background-color: #fca746;
   transition: 300ms;
   box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
-  transform: scale(0.9); /* Scale down slightly */
 }
 
 button:hover {
   background-color: #00966f;
-  transform: scale(1); /* Scale back to original size on hover */
+  transform: scale(1.1);
 }
 
 button:focus {
@@ -232,27 +231,39 @@ button:focus {
 
 .difficulty-button {
   padding: 0.5em 1em;
+  margin-bottom: 1em;
   cursor: pointer;
   border: none;
   border-radius: 5px;
   color: #fca746;
-  background-color: transparent;
+  background-color: #f5d6a5;
   font-size: large;
   transition: 300ms;
   box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
 }
 
 .difficulty-button:hover {
-  background-color: #00966f;
+  background-color: #f5d6a5;
+  z-index: 2;
+  box-shadow: 6px 10px 5px rgba(0, 0, 0, 0.28);
 }
 
 .difficulty-button.selected {
-  background-color: #00966f;
+  color: #00966f;
   box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
 }
 
+.difficulty-button.selected:hover {
+  z-index: 2;
+  box-shadow: 6px 10px 5px rgba(0, 0, 0, 0.28);
+}
+
+.difficulty-button.selected::after {
+  content: "✔";
+}
+
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -263,22 +274,29 @@ button:focus {
 }
 
 .modal-content {
-  color: #f86a0be0;
+  color: aliceblue;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px;
+  padding: 35px 20px;
   width: 200px;
-  border-radius: 30px;
+  border-radius: 5px;
   text-align: center;
-  background-color: #f5d6a5;
+  background-color: #00966f;
+  box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+.modal-content h2 {
+  margin: 0;
+  padding-bottom: 1em;
+  font-size: 2em;
 }
 
 #start-game-btn {
   margin-top: 1em;
   padding: 0.5em 1em;
-  font-size: 1em;
+  font-size: 1.5em;
   cursor: pointer;
   background-color: #fca746;
   border: none;
@@ -286,10 +304,6 @@ button:focus {
   color: antiquewhite;
   transition: 300ms;
   box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
-}
-
-#start-game-btn:hover {
-  background-color: #00966f;
 }
 
 @media screen and (max-width: 800px) {

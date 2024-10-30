@@ -277,21 +277,20 @@ In this phase, we also refactor the code, moving the API call content to a separ
 
 After some time without working on the project, I revisited it from time to time realizing that the API used was not working anymore or taking too long to respond.
 
-On this update I added a script in the `scripts` folder that generates a new puzzle and the solution, this function is called instead of the API call.  It also has a difficulty parameter.
+On this update I added a script in the `scripts` folder that generates a new puzzle and the solution, this function is called instead of the API call. It also has a difficulty parameter.
 This made the whole process much faster and more reliable.
+
+## Difficulty levels
+
+The difficulty levels were added to the game, and the user can choose between easy, medium, and hard. The difficulty level is passed as a parameter to the function that generates the puzzle. Based on the number of tiles removed from the original puzzle, the difficulty level is set. 20 tiles are removed for easy, 40 for medium, and 60 for hard.
 
 # Backlog
 
 As the game was being developed, several ideas emerged that could not be implemented:
 
-- Add difficulty levels
 - Add sounds and music
 - User CRUD
 - Leaderboard for best scores
-
-In one of the tutorial meetings, the proposal was made to divide the columns or cells into groups, as is common in some Sudoku variations, making the separation between each group of three cells more noticeable. This was not possible to implement in time as the game is based on a grid, and the gaps cannot be different depending on the column or row.
-
-Tests involving adding margins, paddings, shadows, etc., did not yield aesthetically pleasing results, so we ultimately decided not to implement this. The most efficient solution would probably involve dividing the board into several grids and rethinking the entire logic.
 
 # Project Links
 

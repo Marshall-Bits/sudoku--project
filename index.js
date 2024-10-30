@@ -111,6 +111,7 @@ const closeMenu = () => {
 };
 
 const openWinMenu = () => {
+  winContainer.style.display = "flex";
   winContainer.style.top = "0";
 };
 
@@ -123,10 +124,9 @@ const difficultyButtons = document.querySelectorAll(".difficulty-button");
 const difficultyModal = document.getElementById("difficulty-modal");
 const startGameBtn = document.getElementById("start-game-btn");
 
-let selectedDifficulty = 40; // Default difficulty
+let selectedDifficulty = 20; // Default difficulty easy, 20 tiles removed from the puzzle
 
 getButton.addEventListener("click", () => {
-  // Show the difficulty modal
   difficultyModal.style.display = "block";
 });
 
@@ -139,10 +139,8 @@ difficultyButtons.forEach(button => {
 });
 
 startGameBtn.addEventListener("click", async () => {
-  // Hide the difficulty modal
   difficultyModal.style.display = "none";
 
-  // Initialize the game
   loading.style.display = "block";
   menuButtonClose.style.display = "block";
   const { puzzle: fetchedPuzzle, solution: fetchedSolvedPuzzle } =
@@ -176,11 +174,11 @@ checkButton.addEventListener("click", () => {
   checkUserSolution();
 });
 
-//Target selected tile
+//Target selected tile to insert symbol
 let selectedTile;
 
 grid.addEventListener("click", handleTileSelection);
-grid.addEventListener("touchstart", handleTileSelection);
+grid.addEventListener("touchstart", handleTileSelection); // mobile
 
 function handleTileSelection(event) {
   if (selectedTile?.children[0] === event.target) {
