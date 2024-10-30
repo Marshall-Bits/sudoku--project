@@ -156,7 +156,10 @@ checkButton.addEventListener("click", () => {
 //Target selected tile
 let selectedTile;
 
-grid.addEventListener("click", (event) => {
+grid.addEventListener("click", handleTileSelection);
+grid.addEventListener("touchstart", handleTileSelection);
+
+function handleTileSelection(event) {
   if (selectedTile?.children[0] === event.target) {
     selectedTile.children[0].src = "";
     selectedTile.children[0].alt = "";
@@ -173,10 +176,13 @@ grid.addEventListener("click", (event) => {
 
   selectedTile.classList.remove("wrong");
   if (event.target.id != "grid") selectedTile.classList.add("selected");
-});
+}
 
 //Target selected symbol to insert
-buttonsGrid.addEventListener("click", (event) => {
+buttonsGrid.addEventListener("click", handleButtonClick);
+buttonsGrid.addEventListener("touchstart", handleButtonClick);
+
+function handleButtonClick(event) {
   const buttonValue = event.target.alt;
   if (buttonValue && selectedTile && selectedTile.children[0]) {
     selectedTile.children[0].src = `./src/img/${buttonValue}.png`;
@@ -186,7 +192,7 @@ buttonsGrid.addEventListener("click", (event) => {
     selectedTile.src = `./src/img/${buttonValue}.png`;
     selectedTile.alt = `${buttonValue}`;
   }
-});
+}
 
 function checkUserSolution() {
   let wrongTiles = 0;
