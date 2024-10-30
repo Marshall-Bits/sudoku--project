@@ -31,11 +31,11 @@ ul {
 }
 
 .right-border {
-    border-right: 3px solid #fca746; 
+  border-right: 3px solid #fca746;
 }
 
 .bottom-border {
-  border-bottom: 3px solid #fca746; 
+  border-bottom: 3px solid #fca746;
 }
 
 .main-title {
@@ -171,24 +171,25 @@ span {
 
 button {
   font-family: "Caveat Brush", cursive;
-  width: 7em;
+  width: 6em; /* Adjusted size */
   border: none;
   background-color: transparent;
   border-radius: 5px;
   color: antiquewhite;
-  font-size: 2em;
+  font-size: 1.5em; /* Adjusted size */
   cursor: pointer;
   background-color: #fca746;
   transition: 300ms;
   box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+  transform: scale(0.9); /* Scale down slightly */
 }
 
 button:hover {
   background-color: #00966f;
+  transform: scale(1); /* Scale back to original size on hover */
 }
 
 button:focus {
-  margin-top: 3px;
   box-shadow: none;
 }
 
@@ -221,6 +222,74 @@ button:focus {
 
 #menu-close-icon {
   display: none;
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.difficulty-button {
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: #fca746;
+  background-color: transparent;
+  font-size: large;
+  transition: 300ms;
+  box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+.difficulty-button:hover {
+  background-color: #00966f;
+}
+
+.difficulty-button.selected {
+  background-color: #00966f;
+  box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  color: #f86a0be0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 200px;
+  border-radius: 30px;
+  text-align: center;
+  background-color: #f5d6a5;
+}
+
+#start-game-btn {
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #fca746;
+  border: none;
+  border-radius: 5px;
+  color: antiquewhite;
+  transition: 300ms;
+  box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+#start-game-btn:hover {
+  background-color: #00966f;
 }
 
 @media screen and (max-width: 800px) {

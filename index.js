@@ -119,11 +119,34 @@ const closeWinMenu = () => {
 };
 
 //Handle buttons
-getButton.addEventListener("click", async () => {
+const difficultyButtons = document.querySelectorAll(".difficulty-button");
+const difficultyModal = document.getElementById("difficulty-modal");
+const startGameBtn = document.getElementById("start-game-btn");
+
+let selectedDifficulty = 40; // Default difficulty
+
+getButton.addEventListener("click", () => {
+  // Show the difficulty modal
+  difficultyModal.style.display = "block";
+});
+
+difficultyButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    selectedDifficulty = parseInt(button.dataset.cellsToRemove, 10);
+    difficultyButtons.forEach(btn => btn.classList.remove("selected"));
+    button.classList.add("selected");
+  });
+});
+
+startGameBtn.addEventListener("click", async () => {
+  // Hide the difficulty modal
+  difficultyModal.style.display = "none";
+
+  // Initialize the game
   loading.style.display = "block";
   menuButtonClose.style.display = "block";
   const { puzzle: fetchedPuzzle, solution: fetchedSolvedPuzzle } =
-    generateSudoku(40);
+    generateSudoku(selectedDifficulty);
 
   loading.style.display = "none";
   puzzle = conCatData(fetchedPuzzle);
@@ -192,6 +215,11 @@ function handleButtonClick(event) {
     selectedTile.src = `./src/img/${buttonValue}.png`;
     selectedTile.alt = `${buttonValue}`;
   }
+
+  // Add logic to highlight the selected button
+  const buttons = buttonsGrid.querySelectorAll("li img");
+  buttons.forEach(button => button.classList.remove("selected"));
+  event.target.classList.add("selected");
 }
 
 function checkUserSolution() {
