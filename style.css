@@ -137,7 +137,7 @@ span {
   justify-content: center;
   transition: 300ms;
 
-  *{
+  * {
     margin: 0;
   }
 }
@@ -308,6 +308,13 @@ button:focus {
   color: antiquewhite;
   transition: 300ms;
   box-shadow: 6px 3px 5px rgba(0, 0, 0, 0.28);
+}
+
+#check-btn {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media screen and (max-width: 800px) {

@@ -225,7 +225,7 @@ function handleButtonClick(event) {
 
   // check blank tiles
   if (getBlankTiles() === 0) {
-    console.log("No more blank tiles");
+    checkButton.style.display = "block";
   }
 }
 
@@ -271,6 +271,7 @@ function countWrongAndBlank(wrongTiles, blankTiles) {
   if (blankTiles > 0) alert(`You are missing ${blankTiles} tiles!`);
   else if (wrongTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes`);
   else if (wrongTiles === 0 && blankTiles === 0) {
+    checkButton.style.display = "none";
     openWinMenu();
     timerResult.innerText = timer;
     points.innerText = calculateFinalPoints(selectedDifficulty);
