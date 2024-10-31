@@ -315,6 +315,7 @@ button:focus {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  animation: fade-in 0.5s;
 }
 
 @media screen and (max-width: 800px) {
@@ -357,5 +358,15 @@ button:focus {
 
   #loading {
     width: 10vw;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

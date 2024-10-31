@@ -106,11 +106,13 @@ function writeSudoku() {
 const openMenu = () => {
   menuContainer.style.left = "0";
   menuButtonHamb.style.left = "-100vw";
+  checkButton.style.display = "none";
 };
 
 const closeMenu = () => {
   menuContainer.style.left = "-100vw";
   menuButtonHamb.style.left = "10px";
+  if (getBlankTiles() === 0) checkButton.style.display = "block";
 };
 
 const openWinMenu = () => {
@@ -185,6 +187,7 @@ grid.addEventListener("touchstart", handleTileSelection); // mobile
 
 function handleTileSelection(event) {
   if (selectedTile?.children[0] === event.target) {
+    checkButton.style.display = "none";
     selectedTile.children[0].src = "";
     selectedTile.children[0].alt = "";
     return;
@@ -226,6 +229,8 @@ function handleButtonClick(event) {
   // check blank tiles
   if (getBlankTiles() === 0) {
     checkButton.style.display = "block";
+  } else {
+    checkButton.style.display = "none";
   }
 }
 
