@@ -3,6 +3,7 @@ import {
   stopTimer,
   resetTimer,
   timer,
+  calculateFinalPoints,
 } from "./src/scripts/timer.js";
 
 import { generateSudoku } from "./src/scripts/create-sudoku.js";
@@ -19,6 +20,7 @@ const SELECTORS = {
   menuButtonClose: "menu-close-icon",
   repeatButton: "repeat-btn",
   timerResult: "timerResult",
+  points: "points",
 };
 
 const {
@@ -33,6 +35,7 @@ const {
   menuButtonClose,
   repeatButton,
   timerResult,
+  points,
 } = Object.entries(SELECTORS).reduce((acc, [key, id]) => {
   acc[key] = document.getElementById(id);
   return acc;
@@ -130,10 +133,10 @@ getButton.addEventListener("click", () => {
   difficultyModal.style.display = "block";
 });
 
-difficultyButtons.forEach(button => {
+difficultyButtons.forEach((button) => {
   button.addEventListener("click", () => {
     selectedDifficulty = parseInt(button.dataset.cellsToRemove, 10);
-    difficultyButtons.forEach(btn => btn.classList.remove("selected"));
+    difficultyButtons.forEach((btn) => btn.classList.remove("selected"));
     button.classList.add("selected");
   });
 });
@@ -216,7 +219,7 @@ function handleButtonClick(event) {
 
   // Add logic to highlight the selected button
   const buttons = buttonsGrid.querySelectorAll("li img");
-  buttons.forEach(button => button.classList.remove("selected"));
+  buttons.forEach((button) => button.classList.remove("selected"));
   event.target.classList.add("selected");
 }
 
@@ -224,18 +227,18 @@ function checkUserSolution() {
   let wrongTiles = 0;
   let blankTiles = 0;
   //Make a new array with user answers matching the data that we have from solvedPuzzle
-  const tiles = [].slice.call(grid.children);
+  const tiles = Array.from(grid.children);
 
-  for (const [i, tile] of tiles.entries()) {
+  tiles.forEach((tile, i) => {
     if (!tile.children[0].alt) {
       blankTiles++;
-      continue;
+      return;
     }
     if (tile.children[0].alt != solvedPuzzle[i]) {
       grid.children[i].classList.add("wrong");
       wrongTiles++;
     }
-  }
+  });
 
   if (blankTiles === 81) {
     //All tiles empty === there's no game started yet && no sudoku to check
@@ -258,6 +261,7 @@ function countWrongAndBlank(wrongTiles, blankTiles) {
   else if (wrongTiles === 0 && blankTiles === 0) {
     openWinMenu();
     timerResult.innerText = timer;
+    points.innerText = calculateFinalPoints(selectedDifficulty);
   }
 }
 
