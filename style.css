@@ -118,10 +118,9 @@ span {
   color: #f86a0be0;
   font-size: 1.5em;
   position: absolute;
-  background: rgb(255, 190, 86);
   background: linear-gradient(
     0deg,
-    rgba(255, 190, 86, 1) 0%,
+    rgb(255, 205, 125) 0%,
     rgba(245, 214, 165, 1) 100%
   );
   width: 100vw;
@@ -137,6 +136,10 @@ span {
   align-items: center;
   justify-content: center;
   transition: 300ms;
+
+  *{
+    margin: 0;
+  }
 }
 
 .menu-button {
@@ -194,6 +197,7 @@ button:focus {
 
 #repeat-btn {
   width: 4em;
+  margin-top: 0.5em;
 }
 
 #get-btn {
