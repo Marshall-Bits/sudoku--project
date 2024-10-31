@@ -213,6 +213,7 @@ function handleButtonClick(event) {
     selectedTile.children[0].alt = `${buttonValue}`;
     selectedTile.classList.remove("wrong");
   } else if (buttonValue && selectedTile) {
+    selectedTile.classList.remove("wrong");
     selectedTile.src = `./src/img/${buttonValue}.png`;
     selectedTile.alt = `${buttonValue}`;
   }
