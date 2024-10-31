@@ -222,19 +222,34 @@ function handleButtonClick(event) {
   const buttons = buttonsGrid.querySelectorAll("li img");
   buttons.forEach((button) => button.classList.remove("selected"));
   event.target.classList.add("selected");
+
+  // check blank tiles
+  if (getBlankTiles() === 0) {
+    console.log("No more blank tiles");
+  }
 }
 
-function checkUserSolution() {
-  let wrongTiles = 0;
+function getBlankTiles() {
   let blankTiles = 0;
-  //Make a new array with user answers matching the data that we have from solvedPuzzle
   const tiles = Array.from(grid.children);
 
-  tiles.forEach((tile, i) => {
+  tiles.forEach((tile) => {
     if (!tile.children[0].alt) {
       blankTiles++;
       return;
     }
+  });
+
+  return blankTiles;
+}
+
+function checkUserSolution() {
+  let wrongTiles = 0;
+  let blankTiles = getBlankTiles();
+  //Make a new array with user answers matching the data that we have from solvedPuzzle
+  const tiles = Array.from(grid.children);
+
+  tiles.forEach((tile, i) => {
     if (tile.children[0].alt != solvedPuzzle[i]) {
       grid.children[i].classList.add("wrong");
       wrongTiles++;
@@ -253,11 +268,7 @@ function checkUserSolution() {
 }
 
 function countWrongAndBlank(wrongTiles, blankTiles) {
-  if (wrongTiles > 0 && blankTiles > 0)
-    alert(
-      `Wrong! you made ${wrongTiles} mistakes and you are missing ${blankTiles} tiles!`
-    );
-  else if (blankTiles > 0) alert(`You are missing ${blankTiles} tiles!`);
+  if (blankTiles > 0) alert(`You are missing ${blankTiles} tiles!`);
   else if (wrongTiles > 0) alert(`Wrong! you made ${wrongTiles} mistakes`);
   else if (wrongTiles === 0 && blankTiles === 0) {
     openWinMenu();
